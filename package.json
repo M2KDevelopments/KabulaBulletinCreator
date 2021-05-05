@@ -1,0 +1,56 @@
+{
+  "name": "kabulahillsdawebtool",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.6",
+    "@testing-library/user-event": "^12.8.3",
+    "alertifyjs": "^1.13.1",
+    "dotenv": "^8.2.0",
+    "file-saver": "^2.0.5",
+    "firebase": "^8.1.1",
+    "html-react-parser": "^1.2.4",
+    "jszip": "^3.5.0",
+    "lottie-react": "^2.1.0",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.4.3",
+    "react-bootstrap-range-slider": "^2.0.2",
+    "react-chartjs-2": "^2.11.1",
+    "react-lottie": "^1.2.3",
+    "react-native-tts": "^4.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-youtube": "^7.13.1",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "Web tools for Kabula Hill SDA Church.",
+  "main": "index.js",
+  "author": "Martin Kululanga",
+  "license": "ISC"
+}

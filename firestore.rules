@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Matches any document in the 'cities' collection or subcollections.
+    match /khc/{document=**} {
+      allow write, create, update, delete: if request.auth!=null && request.auth.uid == "77bjzC52PMUHXsKSsCjR1XThxuE3";
+      allow read : if true;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.footer {
+  background-color: #222222;
+  color: ghostwhite;
+  
+}
+
+.footer .container{
+    padding-top: 45px;
+}
+
+.footer .mbr-text a {
+  color: #e4e4e4;
+  transition: color 0.4s;
+  transition: font-weight 0.2s;
+  text-decoration: none;
+}
+
+.footer .mbr-text a:hover {
+  color: ghostwhite;
+  font-weight: bold;
+}
+
+.footer .svg{
+    z-index: 0;
+}
