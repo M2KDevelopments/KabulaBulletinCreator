@@ -38,6 +38,9 @@ export default function PageBulletin(){
             history.push("/");
         }
     });
+
+    
+    
     
     const onReset = () => {
 
@@ -77,6 +80,8 @@ export default function PageBulletin(){
         }
     }
 
+    
+    
     return (
         <>
             <Container style={{marginTop:50, marginBottom:50}}>
