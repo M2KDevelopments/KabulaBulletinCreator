@@ -6,20 +6,34 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { LoadingAnimation } from "./Lottie";
 
 export default function SectionHome(props){
 
     const [loading, setLoading] = useState(false);
 
-    const onUpdate = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(()=>{
+        async function fetchData(){
+            //get the promise from firebase
+            const request  = await firebase.firestore().collection("khc").doc("front").get();
+            //set in use effect variable
+            setData(request.data());
+            return request;
+        }
+        fetchData();
+    },[]); //if [] run the async work once
+
+    const onUpdate = (e) => {
+        e.preventDefault();
         const front = {
             date: document.getElementById('date').value,
             facebook: document.getElementById('facebook').value,
             website: document.getElementById('website').value,
-            zoomLinkId: document.getElementById('zoomLinkId').value,
-            zoomPasscode: document.getElementById('zoomPasscode').value,
+            zoomLinkId: parseInt(document.getElementById('zoomLinkId').value),
+            zoomPasscode: parseInt(document.getElementById('zoomPasscode').value),
             welcomeMessage: document.getElementById('welcomeMessage').value,
         };
 
@@ -39,7 +53,8 @@ export default function SectionHome(props){
     }
 
     const onUploadImage = (e) => {
-        const file = e.targer.files[0];
+        console.log(e.target);
+        const file = e.target.files[0];
         //validate file input
         if(file === null){
             alertify.warning(`File was not uploaded properly`);
@@ -78,6 +93,10 @@ export default function SectionHome(props){
         }
     }
 
+    if(data === null){
+        return <LoadingAnimation width={200} title="Loading Front Information..."/>
+    }
+
     return (
         <Card>
             <Card.Header>
@@ -90,7 +109,7 @@ export default function SectionHome(props){
                     <div className="centralise">
                         {loading ? <LoadingAnimation width={300} title="Uploading Image..." /> :
                         <>
-                            <img id="image" src="" alt="Kabula Hill SDA Church" width={400} />
+                            <img id="image" src={data.image} alt="Kabula Hill SDA Church" width={400} />
                             <input id="file" type="file" filter="image/*" size={1} onChange={onUploadImage} style={{visibility:"hidden", position:"absolute"}} />
                         </>
                         }
@@ -99,27 +118,27 @@ export default function SectionHome(props){
                     </div>
 
                     <Form.Label as="h6">Date</Form.Label>
-                    <FormControl required id="date" size="lg" type="date" placeholder="Date" />
+                    <FormControl required id="date" size="lg" type="date" placeholder="Date" defaultValue={data.date} />
                     <br/>
 
                     <Form.Label as="h6">Facebook Page Link</Form.Label>
-                    <FormControl required id="facebook" size="lg" type="url" placeholder="Facebook Page Link" />
+                    <FormControl required id="facebook" size="lg" type="url" placeholder="Facebook Page Link" defaultValue={data.facebook} />
                     <br/>
 
                     <Form.Label as="h6">Website</Form.Label>
-                    <FormControl required id="website" size="lg" type="url" placeholder="Website" />
+                    <FormControl required id="website" size="lg" type="url" placeholder="Website" defaultValue={data.website} />
                     <br/>
 
                     <Form.Label as="h6">Zoom Link ID</Form.Label>
-                    <FormControl required id="zoomLinkId" size="lg" type="number" placeholder="Zoom Link ID" />
+                    <FormControl required id="zoomLinkId" size="lg" type="number" placeholder="Zoom Link ID" defaultValue={data.zoomLinkId}/>
                     <br/>
 
                     <Form.Label as="h6">Zoom Passcode</Form.Label>
-                    <FormControl required id="zoomPasscode" size="lg" type="number" placeholder="Zoom Passcode" />
+                    <FormControl required id="zoomPasscode" size="lg" type="number" placeholder="Zoom Passcode" defaultValue={data.zoomPasscode} />
                     <br/>
 
                     <Form.Label as="h6">Welcome Message</Form.Label>
-                    <FormControl required id="welcomeMessage" as="textarea" style={{height:250}} size="lg" type="text" placeholder="Welcome Message" />
+                    <FormControl required id="welcomeMessage" as="textarea" style={{height:250}} size="lg" type="text" placeholder="Welcome Message" defaultValue={data.welcomeMessage}/>
                     <br/>
 
                     <Button variant="dark" size="lg" type="submit">Update Front Page Details</Button>

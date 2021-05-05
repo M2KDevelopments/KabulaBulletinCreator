@@ -9,7 +9,8 @@ import alertify from "alertifyjs";
 
 export default function SectionZones(props){
 
-    const onUpdate = () => {
+    const onUpdate = (e) => {
+        e.preventDefault();
         const zones = {
             chileka: document.getElementById('chileka').value,
             lunzu: document.getElementById('lunzu').value,
@@ -29,7 +30,7 @@ export default function SectionZones(props){
             firebase.firestore()
                 .collection("khc")
                 .doc("zones")
-                .update(zones)
+                .set(zones)
                 .then((ref) => alertify.success(msg))
                 .catch((error)=> alertify.error(error.message));
     }

@@ -9,6 +9,13 @@ import SectionZones from "../components/SectionZones";
 import SectionHome from "../components/SectionHome";
 import SectionPreview from "../components/SectionPreview";
 
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import { useHistory } from "react-router";
+
+
 export default function PageBulletin(){
 
     const SECTION = {
@@ -24,6 +31,13 @@ export default function PageBulletin(){
     }
 
     const [section, setSection] = useState(SECTION.PREVIEW);
+    const history = useHistory();
+    //listen if user exist
+    firebase.auth().onAuthStateChanged((user) => {
+        if(user === null){
+            history.push("/");
+        }
+    });
     
     const onReset = () => {
 

@@ -1,16 +1,32 @@
 import { Button, Card, Form, FormControl } from "react-bootstrap";
 
 
-// Firebase App (the core Firebase SDK) is always required and must be listed first
+// Firebase App (the core Firebase SDK) is always  and must be listed first
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import alertify from "alertifyjs";
+import { useEffect, useState } from "react";
+import { LoadingAnimation } from "./Lottie";
 
 
 export default function SectionAnnouncements(props){
 
-    const onUpdate = () => {
+    const [data, setData] = useState(null);
+
+    useEffect(()=>{
+        async function fetchData(){
+            //get the promise from firebase
+            const request  = await firebase.firestore().collection("khc").doc("announcements").get();
+            //set in use effect variable
+            setData(request.data());
+            return request;
+        }
+        fetchData();
+    },[]); //if [] run the async work once
+
+    const onUpdate = (e) => {
+        e.preventDefault();
         const announcements = {
             welcomeRemarks: document.getElementById('welcomeRemarks').value,
             covidPrevention: document.getElementById('covidPrevention').value,
@@ -33,6 +49,10 @@ export default function SectionAnnouncements(props){
                 .catch((error)=> alertify.error(error.message));
     }
 
+    if(data === null){
+        return <LoadingAnimation width={200} title="Loading Announcements..."/>
+    }
+
     return (
         <>
             <Card>
@@ -43,45 +63,45 @@ export default function SectionAnnouncements(props){
                 <Card.Body>
                     <Form onSubmit={onUpdate}> 
                         <Form.Label as="h6">Welcome Remarks</Form.Label>
-                        <FormControl required id="welcomeRemarks" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Welcome Remarks" />
+                        <FormControl defaultValue={data.welcomeRemarks} id="welcomeRemarks" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Welcome Remarks" />
                         <br/>
 
                         <Form.Label as="h6">Covid Prevention</Form.Label>
-                        <FormControl required id="covidPrevention" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Covid Prevention" />
+                        <FormControl defaultValue={data.covidPrevention} id="covidPrevention" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Covid Prevention" />
                         <br/>
                         
                         <Form.Label as="h6">Church Gatherings</Form.Label>
-                        <FormControl required id="churchGatherings" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Church Gatherings" />
+                        <FormControl defaultValue={data.churchGatherings} id="churchGatherings" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Church Gatherings" />
                         <br/>
                         
                         <Form.Label as="h6">Achievement Classes</Form.Label>
-                        <FormControl required id="achievementClasses" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Achievement Classes" />
+                        <FormControl defaultValue={data.achievementClasses} id="achievementClasses" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Achievement Classes" />
                         <br/>
 
                         <Form.Label as="h6">Counselling and Prayers</Form.Label>
-                        <FormControl required id="counsellingAndPrayers" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Counselling and Prayers" />
+                        <FormControl defaultValue={data.counsellingAndPrayers} id="counsellingAndPrayers" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Counselling and Prayers" />
                         <br/>
 
                         <Form.Label as="h6">Wedding Announcements</Form.Label>
-                        <FormControl required id="wedding" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Wedding Announcements" />
+                        <FormControl defaultValue={data.wedding} id="wedding" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Wedding Announcements" />
                         <br/>
 
                         <Form.Label as="h6">Bereavements and Sicknesses</Form.Label>
-                        <FormControl required id="bereavementsAndSicknesses" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Bereavements and Sicknesses" />
+                        <FormControl defaultValue={data.bereavementsAndSicknesses} id="bereavementsAndSicknesses" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Bereavements and Sicknesses" />
                         <br/>
 
                         <Form.Label as="h6">Tithes and Offerings</Form.Label>
-                        <FormControl required id="titheAndOfferings" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Tithes and Offerings" />
+                        <FormControl defaultValue={data.titheAndOfferings} id="titheAndOfferings" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Tithes and Offerings" />
                         <br/>
 
                         <Form.Label as="h5"><strong>Next Sabbath</strong></Form.Label>
                         <hr/>
                         <Form.Label as="h6">Elders on Duty</Form.Label>
-                        <FormControl required id="nextSabbathOnDuty" size="lg" type="text" placeholder="Elders on duty next Sabbath" />
+                        <FormControl defaultValue={data.nextSabbathOnDuty} id="nextSabbathOnDuty" size="lg" type="text" placeholder="Elders on duty next Sabbath" />
                         <br/>
 
                         <Form.Label as="h6">Elder of the Month</Form.Label>
-                        <FormControl required id="elderOfTheMonth" size="lg" type="text" placeholder="Elder of the month" />
+                        <FormControl defaultValue={data.elderOfTheMonth} id="elderOfTheMonth" size="lg" type="text" placeholder="Elder of the month" />
                         <br/>
                         <Button variant="dark" size="lg" type="submit">Update Announcements</Button> 
                     </Form>
