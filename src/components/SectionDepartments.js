@@ -48,7 +48,7 @@ export default function SectionDepartments(props){
     }
 
     if(data === null){
-        return <LoadingAnimation width={200} title="Loading Departmental Heads..."/>
+        return <LoadingAnimation width={200} title="Loading Department Elders..."/>
     }
 
     return(
