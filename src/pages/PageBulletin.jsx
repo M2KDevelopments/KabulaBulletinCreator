@@ -8,6 +8,7 @@ import SectionDepartmentalHeads from "../components/SectionDepartmentalHeads";
 import SectionZones from "../components/SectionZones";
 import SectionHome from "../components/SectionHome";
 import SectionPreview from "../components/SectionPreview";
+import SectionDepartments from "../components/SectionDepartments";
 
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from "firebase/app";
@@ -21,8 +22,7 @@ export default function PageBulletin(){
     const SECTION = {
         HOME: "Front Page",
         ANNOUNCEMENTS: "Announcements",
-        PROGRAM_FIRST: "Sabbath Program First Service",
-        PROGRAM_SECOND: "Sabbath Program Second Service",
+        PROGRAM: "Sabbath Program ",
         SABBATHSCHOOL: "Sabbath School Program",
         CHURCHACCOUNTS: "Church Accounts",
         DEPARTMENTALHEADS: "Departmental Heads",
@@ -57,10 +57,15 @@ export default function PageBulletin(){
                 return <SectionChurchAccount />
             case SECTION.SABBATHSCHOOL:
                 return <SectionSabbathSchool />
-            case SECTION.PROGRAM_FIRST:
-                return <SectionSabbathProgram service="First" />
-            case SECTION.PROGRAM_SECOND:
-                return <SectionSabbathProgram service="Second" />
+            case SECTION.PROGRAM:
+                return <>
+                            <Row xs={1} sm={1} md={2}>
+                                <Col><SectionSabbathProgram service="First" /></Col>
+                                <Col><SectionSabbathProgram service="Second" /></Col>
+                            </Row>
+                            <hr/>
+                            <SectionDepartments />
+                        </>
             case SECTION.DEPARTMENTALHEADS:
                 return <SectionDepartmentalHeads />
             case SECTION.ZONES:
@@ -95,8 +100,7 @@ export default function PageBulletin(){
                             <Row xs={2} sm={2} md={3}>
                                 <Col><Button variant={section === SECTION.HOME ? "info" : "light"} onClick={() => setSection(SECTION.HOME)}>FRONT PAGE</Button></Col>
                                 <Col><Button variant={section === SECTION.ANNOUNCEMENTS ? "info" : "light"} onClick={() => setSection(SECTION.ANNOUNCEMENTS)}>ANNOUNCEMENTS</Button></Col>
-                                <Col><Button variant={section === SECTION.PROGRAM_FIRST ? "info" : "light"} onClick={() => setSection(SECTION.PROGRAM_FIRST)}>FIRST SERVICE</Button></Col>
-                                <Col><Button variant={section === SECTION.PROGRAM_SECOND ? "info" : "light"} onClick={() => setSection(SECTION.PROGRAM_SECOND)}>SECOND SERVICE</Button></Col>
+                                <Col><Button variant={section === SECTION.PROGRAM ? "info" : "light"} onClick={() => setSection(SECTION.PROGRAM)}>SABBATH SERVICE</Button></Col>
                                 <Col><Button variant={section === SECTION.SABBATHSCHOOL ? "info" : "light"} onClick={() => setSection(SECTION.SABBATHSCHOOL)}>SABBATH SCHOOL</Button></Col>
                                 <Col><Button variant={section === SECTION.CHURCHACCOUNTS ? "info" : "light"} onClick={() => setSection(SECTION.CHURCHACCOUNTS)}>CHURCH ACCOUNTS</Button></Col>
                                 <Col><Button variant={section === SECTION.DEPARTMENTALHEADS ? "info" : "light"} onClick={() => setSection(SECTION.DEPARTMENTALHEADS)}>DEPARTMENTAL HEADS</Button></Col>

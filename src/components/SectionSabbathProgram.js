@@ -55,7 +55,7 @@ export default function SectionSabbathProgram(props){
         }else if(isNaN(currentSabbathProgram.openingHymn)){
             alertify.warning("Please Enter Opening Hymn");
         }else{
-            const msg = 'Updated Sabbath Program Details';
+            const msg = 'Updated Sabbath Program Details For ' + service + " Service";
             firebase.firestore()
                 .collection("khc")
                 .doc(`${service.toLowerCase()}Service`)
@@ -125,7 +125,7 @@ export default function SectionSabbathProgram(props){
                         <Form.Label as="h6">Church Budget Offering</Form.Label>
                         <FormControl defaultValue={data.churchBudgetOffering} required id={`${service}ChurchBudgetOffering`} size="lg" type="name" placeholder="Church Budget Offering" />
                         <br/>
-                        <Button variant="dark" size="lg" type="submit">Update Sabbath Program</Button> 
+                        <Button variant="dark" size="lg" type="submit">Update Sabbath Program - {service} Service</Button> 
                     </Form>
                 </Card.Body>
             </Card>
