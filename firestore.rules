@@ -6,5 +6,10 @@ service cloud.firestore {
       allow write, create, update, delete: if request.auth!=null && request.auth.uid == "77bjzC52PMUHXsKSsCjR1XThxuE3";
       allow read : if true;
     }
+    
+    match /announcements/{document=**} {
+      allow write, create, update, delete: if request.auth!=null && request.auth.uid == "77bjzC52PMUHXsKSsCjR1XThxuE3";
+      allow read : if true;
+    }
   }
 }
