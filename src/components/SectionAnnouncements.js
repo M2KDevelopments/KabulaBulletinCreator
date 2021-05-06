@@ -1,6 +1,5 @@
 import { Button, Card, Form, FormControl } from "react-bootstrap";
 
-
 // Firebase App (the core Firebase SDK) is always  and must be listed first
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -34,6 +33,8 @@ export default function SectionAnnouncements(props){
             achievementClasses: document.getElementById('achievementClasses').value,
             counsellingAndPrayers: document.getElementById('counsellingAndPrayers').value,
             wedding: document.getElementById('wedding').value,
+            holyCommunion: document.getElementById('holyCommunion').value,
+            pastorsEngagements: document.getElementById('pastorsEngagements').value,
             bereavementsAndSicknesses: document.getElementById('bereavementsAndSicknesses').value,
             titheAndOfferings: document.getElementById('titheAndOfferings').value,
             nextSabbathOnDuty: document.getElementById('nextSabbathOnDuty').value,
@@ -81,6 +82,14 @@ export default function SectionAnnouncements(props){
 
                         <Form.Label as="h6">Counselling and Prayers</Form.Label>
                         <FormControl defaultValue={data.counsellingAndPrayers} id="counsellingAndPrayers" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Counselling and Prayers" />
+                        <br/>
+
+                        <Form.Label as="h6">Holy Communion</Form.Label>
+                        <FormControl defaultValue={data.holyCommunion} id="holyCommunion" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Holy Communion" />
+                        <br/>
+
+                        <Form.Label as="h6">Pastor's Engagements</Form.Label>
+                        <FormControl defaultValue={data.pastorsEngagements} id="pastorsEngagements" size="lg" type="text"  as="textarea" style={{height:250}} placeholder="Pastor's Engagements" />
                         <br/>
 
                         <Form.Label as="h6">Wedding Announcements</Form.Label>

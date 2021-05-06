@@ -16,5 +16,11 @@ function Lottie(props) {
 }
 
 export function LoadingAnimation(props){
-  return <div className="centralise" style={{width:props.width, height:props.height}}><Lottie lottie={lottieLoading}  /><br/><h3 className="colorPrimary"><strong>{props.title}</strong></h3></div>
+  return <div className="centralise" style={{width:props.width, height:props.height}}>
+          <Lottie lottie={lottieLoading} />
+            <br/>
+            <h6 className="colorPrimary">
+              <strong>{props.title}</strong>
+            </h6>
+          </div>
 }
