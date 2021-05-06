@@ -16,7 +16,6 @@ import "firebase/auth";
 import "firebase/firestore";
 import { useHistory } from "react-router";
 
-
 export default function PageBulletin(){
 
     const SECTION = {
@@ -39,14 +38,7 @@ export default function PageBulletin(){
         }
     });
 
-    
-    
-    
     const onReset = () => {
-
-    }
-
-    const onDownload  = () => {
 
     }
 
@@ -79,8 +71,6 @@ export default function PageBulletin(){
                 return <SectionAnnouncements />;
         }
     }
-
-    
     
     return (
         <>
@@ -90,8 +80,6 @@ export default function PageBulletin(){
                     <hr/>
                     <Button size="lg" variant="info" onClick={onReset}>Reset Bulletin</Button>
                     <br/>
-                    <br/>
-                    <Button size="lg" variant="warning" onClick={onDownload}><strong>Download Bulletin</strong></Button>
                 </div>
             </Container>
             <Container>

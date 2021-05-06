@@ -72,3 +72,17 @@ i {
 .hover:hover {
   transform: translateY(-5px);
 }
+
+#bulletin .banner{
+  padding:10px;
+  margin-bottom: 20px;
+  background:linear-gradient(#FFF, #e6e6e6);
+  box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -moz-box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -webkit-box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -khtml-box-shadow: 5x 5px 5px rgba(24, 24, 24, 0.603);
+}
+
+#bulletin .title{
+  text-align: center;
+}

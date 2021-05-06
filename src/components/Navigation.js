@@ -40,7 +40,7 @@ export default function Navigation(){
             <Navbar sticky="top" expand="lg" bg="light" variant="dark" className="dropShadow">
                 <Container>
                 <Navbar.Brand style={{margin:0, marginLeft:40}}>
-                    <img src={icon} width="50" height="50" className="hover d-inline-block align-top" alt="React Bootstrap logo" />
+                    <img src={icon} width="50" height="50" className="hover d-inline-block align-top" alt="KHC LOGO" />
                 </Navbar.Brand>
                 <Nav.Link><h3 style={{color:"#333"}}><strong>KHC TOOLS</strong></h3></Nav.Link>
                 <Nav className="mr-auto">
