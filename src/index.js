@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import './css/bulletin.css';
+
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 // Firebase App (the core Firebase SDK) is always required and must be listed first

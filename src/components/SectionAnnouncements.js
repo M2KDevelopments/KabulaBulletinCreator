@@ -37,7 +37,8 @@ export default function SectionAnnouncements(props){
             bereavementsAndSicknesses: document.getElementById('bereavementsAndSicknesses').value,
             titheAndOfferings: document.getElementById('titheAndOfferings').value,
             nextSabbathOnDuty: document.getElementById('nextSabbathOnDuty').value,
-            elderOfTheMonth: document.getElementById('elderOfTheMonth').value
+            elderOfTheMonth: document.getElementById('elderOfTheMonth').value,
+            elderOfTheMonthPhone: document.getElementById('elderOfTheMonthPhone').value
         };
         
         const msg = 'Updated Annoucements Details';
@@ -103,6 +104,12 @@ export default function SectionAnnouncements(props){
                         <Form.Label as="h6">Elder of the Month</Form.Label>
                         <FormControl defaultValue={data.elderOfTheMonth} id="elderOfTheMonth" size="lg" type="text" placeholder="Elder of the month" />
                         <br/>
+
+                        <Form.Label as="h6">Elder of the Month Phone</Form.Label>
+                        <FormControl defaultValue={data.elderOfTheMonthPhone} id="elderOfTheMonthPhone" size="lg" type="phone" placeholder="Phone Number" />
+                        <br/>
+
+
                         <Button variant="dark" size="lg" type="submit">Update Announcements</Button> 
                     </Form>
                 </Card.Body>

@@ -1,0 +1,23 @@
+#bulletin .banner {
+  padding: 10px;
+  margin-bottom: 20px;
+  background: linear-gradient(#fff, #e6e6e6);
+  box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -moz-box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -webkit-box-shadow: 5px 5px 5px rgba(24, 24, 24, 0.603);
+  -khtml-box-shadow: 5x 5px 5px rgba(24, 24, 24, 0.603);
+}
+
+#bulletin .title {
+  text-align: center;
+}
+
+#bulletin h5 {
+    font-size: 1.2rem;
+}
+
+
+#bulletin h6 {
+    font-size: 1.0rem;
+}
+
