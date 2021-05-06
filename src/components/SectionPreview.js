@@ -374,6 +374,20 @@ export default function SectionPreview(props){
                                                     <td>Deaconess/Community Services</td>
                                                     <td>{khc.departments.deaconessAndCommunityPhone}</td>
                                                 </tr>
+
+                                                <hr/>
+
+                                                <tr>
+                                                    <td>{khc.departmentalHeads.churchPastor}</td>
+                                                    <td>Church Pastor</td>
+                                                    <td>{khc.departmentalHeads.churchPastor}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>{khc.departmentalHeads.churchClerk}</td>
+                                                    <td>Church Clerk</td>
+                                                    <td>{khc.departmentalHeads.churchClerk}</td>
+                                                </tr>
                                             </tbody>
                                         </Table>
                                     </Card>
