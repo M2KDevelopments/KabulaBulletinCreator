@@ -11,6 +11,26 @@ import html2pdf from "html2pdf.js"
 export default function SectionPreview(props){
 
     const [khc, setKHC] = useState(null);
+    const [announcements, setAnnouncements] = useState([]);
+     
+    useEffect(()=>{
+        async function fetchData(){
+            //get the promise from firebase
+            const request  = await firebase.firestore().collection("khc").doc("announcements").get();
+            //set in use effect variable
+
+            const list = [];
+            request.forEach(snap =>{
+                const an = snap.data();
+                an.id = snap.id;
+                list.push(an);
+            });
+
+            setAnnouncements(list);
+            return request;
+        }
+        fetchData();
+    },[]); //if [] run the async work once
 
     useEffect(()=>{
         async function fetchData(){
@@ -192,6 +212,20 @@ export default function SectionPreview(props){
                                     <h5><strong>Achievement Classes</strong></h5>
                                     <h6>{khc.announcements.achievementClasses.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
+                                    </>
+                                    }
+
+                                    {announcements.length  === 0 ? <></> : 
+                                    <>
+                                        {
+                                            announcements.map((an =>(
+                                                <>
+                                                    <h5><strong>{an.title}</strong></h5>
+                                                    <h6>{an.text.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                                    <br/><br/>
+                                                </>
+                                            )))
+                                        }
                                     </>
                                     }
                                 </div>

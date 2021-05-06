@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormControl } from "react-bootstrap";
+import { Button, Card, Form, FormControl, Modal, Table } from "react-bootstrap";
 
 // Firebase App (the core Firebase SDK) is always  and must be listed first
 import firebase from "firebase/app";
@@ -123,6 +123,134 @@ export default function SectionAnnouncements(props){
                     </Form>
                 </Card.Body>
             </Card>
+            <br/>
+            <SectionExtraAnnouncements />
+        </>
+    );
+}
+
+function SectionExtraAnnouncements(props){
+    
+    const [announcements, setAnnouncements] = useState([]);
+    const [deleteAnnouncement, setDeleteAnnouncement] = useState(null);
+
+    useEffect(()=>{
+        async function fetchData(){
+            //get the promise from firebase
+            const request  = await firebase.firestore().collection("khc").doc("announcements").get();
+            //set in use effect variable
+
+            const list = [];
+            request.forEach(snap =>{
+                const an = snap.data();
+                an.id = snap.id;
+                list.push(an);
+            });
+
+            setAnnouncements(list);
+            return request;
+        }
+        fetchData();
+    },[]); //if [] run the async work once
+
+    const onAddAnnouncement = (e) => {
+        e.preventDefault();
+        const an = {
+            title: document.getElementById('title').value,
+            text: document.getElementById('text').value
+        };
+        
+        //add to firebase
+        firebase.firestore().collection("announcements")
+            .add().then((ref) => {
+                alertify.success(an.title + " was added successfully");
+                setDeleteAnnouncement(null);
+                an.id = ref.id;
+                announcements.push(an);
+                setAnnouncements(announcements)
+            }).catch(error=>alertify.error(error.message));
+    }
+
+    const onDelete = () => {
+        if(deleteAnnouncement === null){
+            alertify.warning("Please select announcement to delete");
+        }else{
+
+            //delete from firebase
+            firebase.firestore().collection("announcements")
+                .doc(deleteAnnouncement.id)
+                .delete()
+                .then((ref) => {
+                    alertify.success(deleteAnnouncement.title + " was deleted successfully");
+                    setDeleteAnnouncement(null);
+
+                    //remove deleted announcements
+                    const list = [];
+                    for(const an of announcements){
+                        if(an.id === deleteAnnouncement.id){
+                            continue;
+                        }else{
+                            list.push(an);
+                        }
+                    }
+                    setAnnouncements(list);
+                }).catch(error=>alertify.error(error.message));
+        }
+    };
+    
+
+    return(
+        <>
+        <Card>
+            <Card.Header><Card.Title><strong>Extra Announcements</strong></Card.Title></Card.Header>
+            <Card.Body>
+                <Form onSubmit={onAddAnnouncement}>
+                <Form.Label as="h6">Title</Form.Label>
+                    <FormControl required id="title" size="lg" type="text" placeholder="Title" />
+                    <br/>
+
+                    <Form.Label as="h6">Announcement Message</Form.Label>
+                    <FormControl required id="text" as="textarea" style={{height:250}} size="lg" type="text" placeholder="Announcement..." />
+                    <br/>
+
+                    <Button variant="dark" size="lg" type="submit">Add Extra Announcements</Button> 
+                </Form>
+
+                <br/>
+
+                <Table variant="light">
+                    <thead>
+                        <tr>
+                            <th><strong>ELDER</strong></th>
+                            <th><strong>DEPARTMENT(S)</strong></th>
+                            <th><strong>PHONE</strong></th>
+                            <th><strong>ACTION</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {announcements.map((an) => (
+                            <tr key={an.id}>
+                                <td>{an.title}</td>
+                                <td>{an.text}</td>
+                                <td><Button variant="light" onClick={()=>setDeleteAnnouncement(an)}>DELETE</Button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </Card.Body>
+        </Card>
+        <Modal aria-labelledby="contained-modal-title-vcenter" centered show={deleteAnnouncement !== null} onHide={setDeleteAnnouncement(null)}>
+            <Modal.Header closeButton>
+                <Modal.Title as="h1">DELETE</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <h5>Are you sure you want to <strong>delete {deleteAnnouncement.title}?</strong></h5>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button variant="light" onClick={setDeleteAnnouncement(null)}>CANCEL</Button>
+                <Button variant="danger" onClick={onDelete}>DELETE</Button>
+            </Modal.Footer>
+        </Modal>
         </>
     );
 }
