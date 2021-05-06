@@ -16,7 +16,7 @@ export default function SectionPreview(props){
     useEffect(()=>{
         async function fetchData(){
             //get the promise from firebase
-            const request  = await firebase.firestore().collection("khc").doc("announcements").get();
+            const request  = await firebase.firestore().collection("announcements").get();
             //set in use effect variable
 
             const list = [];
@@ -258,6 +258,14 @@ export default function SectionPreview(props){
                                     {khc.announcements.pastorsEngagements.trim() === "" ? <></>:<>
                                     <h5><strong>Pastor's Engagements</strong></h5>
                                     <h6>{khc.announcements.pastorsEngagements.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <br/><br/>
+                                    </>
+                                    }
+
+
+                                    {khc.announcements.churchBoard.trim() === "" ? <></>:<>
+                                    <h5><strong>Church Board</strong></h5>
+                                    <h6>{khc.announcements.churchBoard.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }

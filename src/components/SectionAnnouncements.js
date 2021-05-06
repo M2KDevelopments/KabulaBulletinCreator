@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormControl, Modal, Table } from "react-bootstrap";
+import { Button, Card, Form, FormControl, OverlayTrigger, Popover, Table } from "react-bootstrap";
 
 // Firebase App (the core Firebase SDK) is always  and must be listed first
 import firebase from "firebase/app";
@@ -34,6 +34,7 @@ export default function SectionAnnouncements(props){
             counsellingAndPrayers: document.getElementById('counsellingAndPrayers').value,
             wedding: document.getElementById('wedding').value,
             holyCommunion: document.getElementById('holyCommunion').value,
+            churchBoard: document.getElementById('churchBoard').value,
             pastorsEngagements: document.getElementById('pastorsEngagements').value,
             bereavementsAndSicknesses: document.getElementById('bereavementsAndSicknesses').value,
             titheAndOfferings: document.getElementById('titheAndOfferings').value,
@@ -100,6 +101,10 @@ export default function SectionAnnouncements(props){
                         <FormControl defaultValue={data.bereavementsAndSicknesses} id="bereavementsAndSicknesses" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Bereavements and Sicknesses" />
                         <br/>
 
+                        <Form.Label as="h6">Church Board</Form.Label>
+                        <FormControl defaultValue={data.churchBoard} id="churchBoard" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Church Board" />
+                        <br/>
+
                         <Form.Label as="h6">Tithes and Offerings</Form.Label>
                         <FormControl defaultValue={data.titheAndOfferings} id="titheAndOfferings" size="lg" type="text" as="textarea" style={{height:250}} placeholder="Tithes and Offerings" />
                         <br/>
@@ -132,12 +137,11 @@ export default function SectionAnnouncements(props){
 function SectionExtraAnnouncements(props){
     
     const [announcements, setAnnouncements] = useState([]);
-    const [deleteAnnouncement, setDeleteAnnouncement] = useState(null);
-
+     
     useEffect(()=>{
         async function fetchData(){
             //get the promise from firebase
-            const request  = await firebase.firestore().collection("khc").doc("announcements").get();
+            const request  = await firebase.firestore().collection("announcements").get();
             //set in use effect variable
 
             const list = [];
@@ -162,16 +166,20 @@ function SectionExtraAnnouncements(props){
         
         //add to firebase
         firebase.firestore().collection("announcements")
-            .add().then((ref) => {
+            .add(an).then((ref) => {
                 alertify.success(an.title + " was added successfully");
-                setDeleteAnnouncement(null);
                 an.id = ref.id;
-                announcements.push(an);
-                setAnnouncements(announcements)
+                const list = [];
+                announcements.forEach(old => list.push(old));
+                list.push(an)
+                setAnnouncements(list);
             }).catch(error=>alertify.error(error.message));
+
+        document.getElementById('title').value = "";
+        document.getElementById('text').value = "";
     }
 
-    const onDelete = () => {
+    const onDelete = (deleteAnnouncement) => {
         if(deleteAnnouncement === null){
             alertify.warning("Please select announcement to delete");
         }else{
@@ -182,8 +190,7 @@ function SectionExtraAnnouncements(props){
                 .delete()
                 .then((ref) => {
                     alertify.success(deleteAnnouncement.title + " was deleted successfully");
-                    setDeleteAnnouncement(null);
-
+                     
                     //remove deleted announcements
                     const list = [];
                     for(const an of announcements){
@@ -221,9 +228,8 @@ function SectionExtraAnnouncements(props){
                 <Table variant="light">
                     <thead>
                         <tr>
-                            <th><strong>ELDER</strong></th>
-                            <th><strong>DEPARTMENT(S)</strong></th>
-                            <th><strong>PHONE</strong></th>
+                            <th><strong>TITLE</strong></th>
+                            <th><strong>ANNOUNCEMENT(S)</strong></th>
                             <th><strong>ACTION</strong></th>
                         </tr>
                     </thead>
@@ -232,25 +238,27 @@ function SectionExtraAnnouncements(props){
                             <tr key={an.id}>
                                 <td>{an.title}</td>
                                 <td>{an.text}</td>
-                                <td><Button variant="light" onClick={()=>setDeleteAnnouncement(an)}>DELETE</Button></td>
+                                <td>
+                                <OverlayTrigger trigger="click" key="bottom" placement="bottom"
+                                    overlay={
+                                        <Popover>
+                                            <Popover.Title><h4>Delete {an.title}</h4></Popover.Title>
+                                            <Popover.Content>
+                                                <h5>Are you sure you want to <strong>delete {an.title}?</strong></h5>
+                                                <hr/>
+                                                <Button variant="danger" onClick={() => onDelete(an)}>DELETE {an.title.toUpperCase()}</Button>
+                                            </Popover.Content>
+                                        </Popover>
+                                    }>
+                                    <Button variant="light">DELETE</Button>
+                                </OverlayTrigger>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </Table>
             </Card.Body>
         </Card>
-        <Modal aria-labelledby="contained-modal-title-vcenter" centered show={deleteAnnouncement !== null} onHide={setDeleteAnnouncement(null)}>
-            <Modal.Header closeButton>
-                <Modal.Title as="h1">DELETE</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <h5>Are you sure you want to <strong>delete {deleteAnnouncement.title}?</strong></h5>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="light" onClick={setDeleteAnnouncement(null)}>CANCEL</Button>
-                <Button variant="danger" onClick={onDelete}>DELETE</Button>
-            </Modal.Footer>
-        </Modal>
         </>
     );
 }

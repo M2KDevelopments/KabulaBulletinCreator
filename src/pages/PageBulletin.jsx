@@ -106,10 +106,11 @@ export default function PageBulletin(){
                 </div>
             </Container>
 
+            {section === SECTION.PREVIEW ? showSection() :
             <Container style={{marginTop:50, marginBottom:50}}>
                 {showSection()}
             </Container>
-
+            }
         </>
         
     );
