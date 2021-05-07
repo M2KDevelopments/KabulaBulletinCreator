@@ -19,6 +19,7 @@ export function LoadingAnimation(props){
   return <div className="centralise" style={{width:props.width, height:props.height}}>
           <Lottie lottie={lottieLoading} />
             <br/>
+            <hr/>
             <h6 className="colorPrimary">
               <strong>{props.title}</strong>
             </h6>
