@@ -115,10 +115,19 @@ export default function SectionPreview(props){
         //html2pdf(element, opt);
     }
 
+    console.log(new Date().getDay());
+
     if(khc === null){
         return <Container style={{paddingTop:50, paddingBottom:40}}>
                 <LoadingAnimation width={200} title="Loading Bulletin..."/>
             </Container>
+    }
+
+    const FRIDAY = 5, SABBATH = 6;
+    if((new Date().getDay() === FRIDAY || new Date().getDay() === SABBATH) === false){
+        <Container style={{paddingTop:50, paddingBottom:40}}>
+            <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
+        </Container>
     }
     
     return (
