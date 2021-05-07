@@ -118,14 +118,14 @@ export default function SectionPreview(props){
     const FRIDAY = 5, SABBATH = 6;
     if((new Date().getDay() !==  FRIDAY || new Date().getDay() !== SABBATH)){
         return <Container style={{paddingTop:100, paddingBottom:40}}>
-            <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
-            <br/>
-            <div className="centralise">
-                <Button variant="primary" size="lg" href="http://kabulahillsdachurch.com">
-                    <strong>VISIT OUR WEBSITE</strong>
-                </Button>
-            </div>
-        </Container>
+                    <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
+                    <br/>
+                    <div className="centralise">
+                        <Button variant="primary" size="lg" href="http://kabulahillsdachurch.com">
+                            <strong>VISIT OUR WEBSITE</strong>
+                        </Button>
+                    </div>
+                </Container>
     }
 
     if(khc === null){
@@ -149,6 +149,73 @@ export default function SectionPreview(props){
                         <strong>Download Bulletin</strong>
                     </Button>
                 </div>
+
+                <Card>
+                    <Card.Body>
+                        <Row xs={1} sm={2} md={3}>
+                            <Col>
+                                <Card>
+                                    <Card.Header style={{textAlign:"center"}}>
+                                        <h4><strong>CHURCH ACCOUNTS</strong></h4>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <h6><strong>Bank details are as follows:</strong></h6>
+                                        <ul>
+                                            <li>Bank Name: {khc.accounts.bankName}</li>
+                                            <li>Account Name: {khc.accounts.accountName}</li>
+                                            <li>Tithe and Offering Account No : {khc.accounts.titleAndOffering}</li>
+                                            <li>Church Building Account No : {khc.accounts.churchBuilding} </li>
+                                        </ul>
+                                        <hr/>
+                                        {khc.accounts.tnmTitleAndOffering.trim() === "" && khc.accounts.tnmChurchBuilding.trim() === "" ? <></>:
+                                        <>
+                                            <h6><strong>TNM Mpamba Mobile Money Accounts:</strong></h6>
+                                            <ul>
+                                                <li>Church Building Account No : {khc.accounts.tnmTitleAndOffering} </li>
+                                                <li>Church Building Merchant Code: {khc.accounts.tnmChurchBuilding} </li>
+                                            </ul>
+                                        </>
+                                        }
+                                        <br/>
+                                        {khc.accounts.airtelTitleAndOffering.trim() === "" && khc.accounts.airtelTitleAndOffering.trim() === "" ? <></>:
+                                        <>
+                                            <h6><strong>Airtel Money Accounts:</strong></h6>
+                                            <ul>
+                                                <li>Church Building Account No : {khc.accounts.airtelTitleAndOffering}</li>
+                                                <li>Church Building Merchant Code: {khc.accounts.airtelChurchBuilding}</li>
+                                            </ul>
+                                        </>
+                                        }
+                                    </Card.Body>
+                                </Card>
+                                <br/>
+                                <Card>
+                                    <Card.Header>
+                                        <h4><strong>departmental Heads</strong></h4>
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <Table variant="light">
+                                            <thead></thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Church Pastor</td>
+                                                    <td>{khc.departmentalHeads.churchPastor.name}</td>
+                                                    <td>{khc.departmentalHeads.churchPastor.phone}</td>
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+
+
+                            <Col>
+                            </Col>
+                            <Col>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
 
                 <Card id="bulletin">
                     <Card.Body>
