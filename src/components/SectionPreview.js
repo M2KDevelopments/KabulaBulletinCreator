@@ -75,8 +75,7 @@ export default function SectionPreview(props){
             //get the promise from firebase
             request = await firebase.firestore().collection("khc").doc("zones").get();
             khc.zones = request.data();
-
-             
+ 
             //set in use effect variable
             setKHC(khc);
             return request;
@@ -212,9 +211,7 @@ export default function SectionPreview(props){
                                     </Card.Body>
                                 </Card>
                                 <br/><br/>
-                                <div  className="banner">
-
-                                
+                               
                                 <Card>
                                     <Card.Header>
                                         <h4><strong>Departmental Heads</strong></h4>
@@ -225,164 +222,164 @@ export default function SectionPreview(props){
                                             <tbody>
                                                 <tr>
                                                     <td>Church Pastor</td>
-                                                    <td>{khc.departmentalHeads.churchPastor.name}</td>
-                                                    <td>{khc.departmentalHeads.churchPastor.phone}</td>
+                                                    <td>{khc.departmentalHeads.churchPastor}</td>
+                                                    <td>{khc.departmentalHeads.churchPastorPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>First Elder</td>
-                                                    <td>{khc.departmentalHeads.firstElder.name}</td>
-                                                    <td>{khc.departmentalHeads.firstElder.phone}</td>
+                                                    <td>{khc.departmentalHeads.firstElder}</td>
+                                                    <td>{khc.departmentalHeads.firstElderPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Second Elder</td>
-                                                    <td>{khc.departmentalHeads.secondElder.name}</td>
-                                                    <td>{khc.departmentalHeads.secondElder.phone}</td>
+                                                    <td>{khc.departmentalHeads.secondElder}</td>
+                                                    <td>{khc.departmentalHeads.secondElderPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Head Deacon</td>
-                                                    <td>{khc.departmentalHeads.headDeacon.name}</td>
-                                                    <td>{khc.departmentalHeads.headDeacon.phone}</td>
+                                                    <td>{khc.departmentalHeads.headDeacon}</td>
+                                                    <td>{khc.departmentalHeads.headDeaconPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Head Deaconess</td>
-                                                    <td>{khc.departmentalHeads.headDeaconess.name}</td>
-                                                    <td>{khc.departmentalHeads.headDeaconess.phone}</td>
+                                                    <td>{khc.departmentalHeads.headDeaconess}</td>
+                                                    <td>{khc.departmentalHeads.headDeaconessPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Treasurer</td>
-                                                    <td>{khc.departmentalHeads.treasurer.name}</td>
-                                                    <td>{khc.departmentalHeads.treasurer.phone}</td>
+                                                    <td>{khc.departmentalHeads.treasurer}</td>
+                                                    <td>{khc.departmentalHeads.treasurerPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Church Clerk</td>
-                                                    <td>{khc.departmentalHeads.churchClerk.name}</td>
-                                                    <td>{khc.departmentalHeads.churchClerk.phone}</td>
+                                                    <td>{khc.departmentalHeads.churchClerk}</td>
+                                                    <td>{khc.departmentalHeads.churchClerkPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Stewardship</td>
-                                                    <td>{khc.departmentalHeads.stewardship.name}</td>
-                                                    <td>{khc.departmentalHeads.stewardship.phone}</td>
+                                                    <td>{khc.departmentalHeads.stewardship}</td>
+                                                    <td>{khc.departmentalHeads.stewardshipPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Communications</td>
-                                                    <td>{khc.departmentalHeads.communications.name}</td>
-                                                    <td>{khc.departmentalHeads.communications.phone}</td>
+                                                    <td>{khc.departmentalHeads.communications}</td>
+                                                    <td>{khc.departmentalHeads.communicationsPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Personal Ministries</td>
-                                                    <td>{khc.departmentalHeads.personalMinistries.name}</td>
-                                                    <td>{khc.departmentalHeads.personalMinistries.phone}</td>
+                                                    <td>{khc.departmentalHeads.personalMinistries}</td>
+                                                    <td>{khc.departmentalHeads.personalMinistriesPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Sabbath School</td>
-                                                    <td>{khc.departmentalHeads.sabbathSchool.name}</td>
-                                                    <td>{khc.departmentalHeads.sabbathSchool.phone}</td>
+                                                    <td>{khc.departmentalHeads.sabbathSchool}</td>
+                                                    <td>{khc.departmentalHeads.sabbathSchoolPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Family Ministries</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries1.name}</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries1.phone}</td>
+                                                    <td>{khc.departmentalHeads.familyMinistries1}</td>
+                                                    <td>{khc.departmentalHeads.familyMinistries1Phone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Family Ministries</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries2.name}</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries2.phone}</td>
+                                                    <td>{khc.departmentalHeads.familyMinistries2}</td>
+                                                    <td>{khc.departmentalHeads.familyMinistries2Phone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Projects</td>
-                                                    <td>{khc.departmentalHeads.projects.name}</td>
-                                                    <td>{khc.departmentalHeads.projects.phone}</td>
+                                                    <td>{khc.departmentalHeads.projects}</td>
+                                                    <td>{khc.departmentalHeads.projectsPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Interest Coordinator</td>
-                                                    <td>{khc.departmentalHeads.interestCoordinator.name}</td>
-                                                    <td>{khc.departmentalHeads.interestCoordinator.phone}</td>
+                                                    <td>{khc.departmentalHeads.interestCoordinator}</td>
+                                                    <td>{khc.departmentalHeads.interestCoordinatorPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Community Service</td>
-                                                    <td>{khc.departmentalHeads.communityService.name}</td>
-                                                    <td>{khc.departmentalHeads.communityService.phone}</td>
+                                                    <td>{khc.departmentalHeads.communityService}</td>
+                                                    <td>{khc.departmentalHeads.communityServicePhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Children Ministries</td>
-                                                    <td>{khc.departmentalHeads.childrenMinistries.name}</td>
-                                                    <td>{khc.departmentalHeads.childrenMinistries.phone}</td>
+                                                    <td>{khc.departmentalHeads.childrenMinistries}</td>
+                                                    <td>{khc.departmentalHeads.childrenMinistriesPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Adventist Youth</td>
-                                                    <td>{khc.departmentalHeads.adventistYouth.name}</td>
-                                                    <td>{khc.departmentalHeads.adventistYouth.phone}</td>
+                                                    <td>{khc.departmentalHeads.adventistYouth}</td>
+                                                    <td>{khc.departmentalHeads.adventistYouthPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Pathfinder Director</td>
-                                                    <td>{khc.departmentalHeads.pathfinderDirector.name}</td>
-                                                    <td>{khc.departmentalHeads.pathfinderDirector.phone}</td>
+                                                    <td>{khc.departmentalHeads.pathfinderDirector}</td>
+                                                    <td>{khc.departmentalHeads.pathfinderDirectorPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Ambassador</td>
-                                                    <td>{khc.departmentalHeads.ambassador.name}</td>
-                                                    <td>{khc.departmentalHeads.ambassador.phone}</td>
+                                                    <td>{khc.departmentalHeads.ambassador}</td>
+                                                    <td>{khc.departmentalHeads.ambassadorPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Youth Adults</td>
-                                                    <td>{khc.departmentalHeads.youthAdults.name}</td>
-                                                    <td>{khc.departmentalHeads.youthAdults.phone}</td>
+                                                    <td>{khc.departmentalHeads.youthAdults}</td>
+                                                    <td>{khc.departmentalHeads.youthAdultsPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Master Guide</td>
-                                                    <td>{khc.departmentalHeads.masterGuide.name}</td>
-                                                    <td>{khc.departmentalHeads.masterGuide.phone}</td>
+                                                    <td>{khc.departmentalHeads.masterGuide}</td>
+                                                    <td>{khc.departmentalHeads.masterGuidePhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Women Ministry</td>
-                                                    <td>{khc.departmentalHeads.womenMinistry.name}</td>
-                                                    <td>{khc.departmentalHeads.womenMinistry.phone}</td>
+                                                    <td>{khc.departmentalHeads.womenMinistry}</td>
+                                                    <td>{khc.departmentalHeads.womenMinistryPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Adventist Men</td>
-                                                    <td>{khc.departmentalHeads.adventistMen.name}</td>
-                                                    <td>{khc.departmentalHeads.adventistMen.phone}</td>
+                                                    <td>{khc.departmentalHeads.adventistMen}</td>
+                                                    <td>{khc.departmentalHeads.adventistMenPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Health Ministries</td>
-                                                    <td>{khc.departmentalHeads.healthMinistries.name}</td>
-                                                    <td>{khc.departmentalHeads.healthMinistries.phone}</td>
+                                                    <td>{khc.departmentalHeads.healthMinistries}</td>
+                                                    <td>{khc.departmentalHeads.healthMinistriesPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>PARL</td>
-                                                    <td>{khc.departmentalHeads.parl.name}</td>
-                                                    <td>{khc.departmentalHeads.parl.phone}</td>
+                                                    <td>{khc.departmentalHeads.parl}</td>
+                                                    <td>{khc.departmentalHeads.parlPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Music</td>
-                                                    <td>{khc.departmentalHeads.music.name}</td>
-                                                    <td>{khc.departmentalHeads.music.phone}</td>
+                                                    <td>{khc.departmentalHeads.music}</td>
+                                                    <td>{khc.departmentalHeads.musicPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Education</td>
-                                                    <td>{khc.departmentalHeads.education.name}</td>
-                                                    <td>{khc.departmentalHeads.education.phone}</td>
+                                                    <td>{khc.departmentalHeads.education}</td>
+                                                    <td>{khc.departmentalHeads.educationPhone}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Vespers</td>
-                                                    <td>{khc.departmentalHeads.verspers.name}</td>
-                                                    <td>{khc.departmentalHeads.verspers.phone}</td>
+                                                    <td>{khc.departmentalHeads.verspers}</td>
+                                                    <td>{khc.departmentalHeads.verspersPhone}</td>
                                                 </tr>
                                                 
                                             </tbody>
                                         </Table>
                                         <br/>
-                                        <div className="banner">
+                                        <div className="centralise">
                                             <h5>{`Kabula Hill SDA Church © Copyright ${year}`}</h5>
                                         </div>
                                     </Card.Body>
                                 </Card>
-                                </div>
+                        
                             </Col>
 
 
                             <Col>
-                                <div className="banner">
+                                
                                     <Card>
                                         <Card.Header>
                                             <strong>SABBATTH SCHOOL LESSON</strong>
@@ -391,9 +388,9 @@ export default function SectionPreview(props){
 
                                         </Card.Body>
                                     </Card>
-                                </div>
+
+                                    <br/>
                                 
-                                <div  className="banner">
                                     <Card>
                                         <Card.Header>
                                             <strong>CHURCH ZONES</strong>  
@@ -408,67 +405,64 @@ export default function SectionPreview(props){
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <th>{khc.zones.chileka}</th>
-                                                        <th>Chileka, Chatha, Ngumbe</th>
+                                                        <td>{khc.zones.chileka}</td>
+                                                        <td>Chileka, Chatda, Ngumbe</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.lunzu}</th>
-                                                        <th>Lunzu, Ngumbe GDC</th>
+                                                        <td>{khc.zones.lunzu}</td>
+                                                        <td>Lunzu, Ngumbe GDC</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.ndirande}</th>
-                                                        <th>Ndirande, Nyambadwe, Kameza</th>
+                                                        <td>{khc.zones.ndirande}</td>
+                                                        <td>Ndirande, Nyambadwe, Kameza</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.chitawira}</th>
-                                                        <th>Chitawira, Naperi, Tikumbe, Manja, Soche Hill, Njamba</th>
+                                                        <td>{khc.zones.chitawira}</td>
+                                                        <td>Chitawira, Naperi, Tikumbe, Manja, Soche Hill, Njamba</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.kabula}</th>
-                                                        <th>Kabula, Mt Pleasant, Mandala,College of Medicine</th>
+                                                        <td>{khc.zones.kabula}</td>
+                                                        <td>Kabula, Mt Pleasant, Mandala,College of Medicine</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.limbe}</th>
-                                                        <th>Limbe, Bangwe, BCA, Chigumula</th>
+                                                        <td>{khc.zones.limbe}</td>
+                                                        <td>Limbe, Bangwe, BCA, Chigumula</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.chilobew}</th>
-                                                        <th>Chilobwe, Mpemba, Green Corner</th>
+                                                        <td>{khc.zones.chilobew}</td>
+                                                        <td>Chilobwe, Mpemba, Green Corner</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.masalema}</th>
-                                                        <th>Masalema, Angelo, Chinyonga, Kanjedza, Chirichi</th>
+                                                        <td>{khc.zones.masalema}</td>
+                                                        <td>Masalema, Angelo, Chinyonga, Kanjedza, Chirichi</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.nkolokosa}</th>
-                                                        <th>Nkolokosa, Soche E, Chimwankhunda, Zingwangwa</th>
+                                                        <td>{khc.zones.nkolokosa}</td>
+                                                        <td>Nkolokosa, Soche E, Chimwankhunda, Zingwangwa</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.mbayani}</th>
-                                                        <th>Mbayani, Chemusa, Chirimba, Chapima</th>
+                                                        <td>{khc.zones.mbayani}</td>
+                                                        <td>Mbayani, Chemusa, Chirimba, Chapima</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.namiwawa}</th>
-                                                        <th>Namiwawa, Chilomoni/Fargo, Sigerege, Michiru</th>
+                                                        <td>{khc.zones.namiwawa}</td>
+                                                        <td>Namiwawa, Chilomoni/Fargo, Sigerege, Michiru</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>{khc.zones.sunnyside}</th>
-                                                        <th>Sunnyside, Manase, Nacholi, CI</th>
+                                                        <td>{khc.zones.sunnyside}</td>
+                                                        <td>Sunnyside, Manase, Nacholi, CI</td>
                                                     </tr>
                                                 </tbody>
 
                                             </Table>
                                         </Card.Body>
                                     </Card>
-                                
-                                </div>
-                                
                        
                             </Col>
                             
                             <Col>
                                 <div className="centralise">
-                                    <img src={sdaLogo} alt="SEVETH DAY ADVENTIST CHURCH" width={200}/>
+                                    <img src={sdaLogo} alt="SEVENTH DAY ADVENTIST CHURCH" width={200}/>
                                     <h3>Off Kabula Hill Road, Box 1969, Blantyre</h3>   
                                     <h2>{"Kabula Hill SDA Church".toUpperCase()}</h2>
                                     <h1>{`${day} ${month} ${year}`}</h1>
@@ -476,6 +470,7 @@ export default function SectionPreview(props){
                                     <img src={khc.front.image} alt="Kabula Hill" className="dropShadow" width={400} />
                                     <br/>
                                     <h4>{khc.front.tagLine}</h4>
+                                    <br/>
                                     <div className="banner">
                                         <Row>
                                             <Col><h5>Zoom Link ID: {khc.front.zoomLinkId}</h5></Col>
@@ -488,7 +483,7 @@ export default function SectionPreview(props){
                                     <h4>
                                         <i style={{color:"#471F1F"}}>
                                             {khc.front.welcomeMessage.split("\n").map(text => 
-                                                text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}
+                                                text === "" ? <br/> : <ul><li>{text}</li></ul>)}
                                         </i>
                                     </h4>
                                     <div className="banner">
@@ -561,21 +556,21 @@ export default function SectionPreview(props){
 
                                     {khc.announcements.covidPrevention.trim() === "" ? <></>:<>
                                     <h5><strong>Covid 19 - Preventation</strong></h5>
-                                    <h6>{khc.announcements.covidPrevention.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.covidPrevention.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
 
                                     {khc.announcements.churchGatherings.trim() === "" ? <></>:<>
                                     <h5><strong>Church Gatherings</strong></h5>
-                                    <h6>{khc.announcements.churchGatherings.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.churchGatherings.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
 
                                     {khc.announcements.achievementClasses.trim() === "" ? <></>:<>
                                     <h5><strong>Achievement Classes</strong></h5>
-                                    <h6>{khc.announcements.achievementClasses.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.achievementClasses.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
@@ -586,7 +581,7 @@ export default function SectionPreview(props){
                                             announcements.map((an =>(
                                                 <>
                                                     <h5><strong>{an.title}</strong></h5>
-                                                    <h6>{an.text.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                                    <h6>{an.text.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                                     <br/><br/>
                                                 </>
                                             )))
@@ -602,19 +597,19 @@ export default function SectionPreview(props){
                                 </div>
                                 <div className="banner">
                                     <h5><strong>Counselling and Prayers</strong></h5>
-                                    <h6>{khc.announcements.counsellingAndPrayers.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.counsellingAndPrayers.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
 
                                     {khc.announcements.wedding.trim() === "" ? <></>:<>
                                     <h5><strong>Wedding Announcements</strong></h5>
-                                    <h6>{khc.announcements.wedding.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.wedding.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
 
                                     {khc.announcements.bereavementsAndSicknesses.trim() === "" ? <></>:<>
                                     <h5><strong>Bereavements And Sicknesses</strong></h5>
-                                    <h6>{khc.announcements.bereavementsAndSicknesses.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.bereavementsAndSicknesses.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
@@ -622,7 +617,7 @@ export default function SectionPreview(props){
 
                                     {khc.announcements.pastorsEngagements.trim() === "" ? <></>:<>
                                     <h5><strong>Pastor's Engagements</strong></h5>
-                                    <h6>{khc.announcements.pastorsEngagements.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.pastorsEngagements.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
@@ -630,21 +625,21 @@ export default function SectionPreview(props){
 
                                     {khc.announcements.churchBoard.trim() === "" ? <></>:<>
                                     <h5><strong>Church Board</strong></h5>
-                                    <h6>{khc.announcements.churchBoard.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.churchBoard.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
 
                                     {khc.announcements.holyCommunion.trim() === "" ? <></>:<>
                                     <h5><strong>Holy Communion</strong></h5>
-                                    <h6>{khc.announcements.holyCommunion.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.holyCommunion.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
 
                                     {khc.announcements.titheAndOfferings.trim() === "" ? <></>:<>
                                     <h5><strong>Tithe and Offering</strong></h5>
-                                    <h6>{khc.announcements.titheAndOfferings.split("\n").map(text => text === "\n" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
+                                    <h6>{khc.announcements.titheAndOfferings.split("\n").map(text => text === "" ? <br/> : <ul><li>{text}</li></ul>)}</h6>
                                     <br/><br/>
                                     </>
                                     }
@@ -740,20 +735,21 @@ export default function SectionPreview(props){
                                                     <td>{khc.departments.deaconessAndCommunityPhone}</td>
                                                 </tr>
 
-                                                <hr/>
+                                                </tbody>
 
-                                                <tr>
-                                                    <td>{khc.departmentalHeads.churchPastor}</td>
-                                                    <td>Church Pastor</td>
-                                                    <td>{khc.departmentalHeads.churchPastor}</td>
-                                                </tr>
+                                                <tfoot>
+                                                    <tr>
+                                                        <td>{khc.departmentalHeads.churchPastor}</td>
+                                                        <td>Church Pastor</td>
+                                                        <td>{khc.departmentalHeads.churchPastor}</td>
+                                                    </tr>
 
-                                                <tr>
-                                                    <td>{khc.departmentalHeads.churchClerk}</td>
-                                                    <td>Church Clerk</td>
-                                                    <td>{khc.departmentalHeads.churchClerk}</td>
-                                                </tr>
-                                            </tbody>
+                                                    <tr>
+                                                        <td>{khc.departmentalHeads.churchClerk}</td>
+                                                        <td>Church Clerk</td>
+                                                        <td>{khc.departmentalHeads.churchClerk}</td>
+                                                    </tr>
+                                                </tfoot>
                                         </Table>
                                     </Card>
                                 </div>

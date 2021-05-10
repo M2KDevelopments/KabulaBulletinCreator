@@ -1,4 +1,4 @@
-#bulletin .banner {
+.banner {
   padding: 10px;
   margin-bottom: 20px;
   background: linear-gradient(#fff, #e6e6e6);
@@ -19,4 +19,9 @@
 
 #bulletin h6 {
     font-size: 1.0rem;
+}
+
+
+.table td{
+  padding: 0.25rem;
 }
