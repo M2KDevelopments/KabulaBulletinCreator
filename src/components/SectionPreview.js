@@ -118,18 +118,20 @@ export default function SectionPreview(props){
         //html2pdf(element, opt);
     }
 
-    
-    if((new Date().getDay() !==  FRIDAY || new Date().getDay() !== SABBATH)){
-        return <Container style={{paddingTop:100, paddingBottom:40}}>
-                    <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
-                    <br/>
-                    <div className="centralise">
-                        <Button variant="primary" size="lg" href="http://kabulahillsdachurch.com">
-                            <strong>VISIT OUR WEBSITE</strong>
-                        </Button>
-                    </div>
-                </Container>
+    if(props.page){
+        if((new Date().getDay() !==  FRIDAY || new Date().getDay() !== SABBATH)){
+                return <Container style={{paddingTop:100, paddingBottom:40}}>
+                            <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
+                            <br/>
+                            <div className="centralise">
+                                <Button variant="primary" size="lg" href="http://kabulahillsdachurch.com">
+                                    <strong>VISIT OUR WEBSITE</strong>
+                                </Button>
+                            </div>
+                        </Container>
+            }
     }
+    
 
     if(khc === null){
         return <Container style={{paddingTop:100, paddingBottom:40}}>

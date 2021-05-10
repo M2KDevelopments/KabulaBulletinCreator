@@ -31,7 +31,7 @@ export default function SectionDepartmentalHeads(props){
             headDeacon: {name: document.getElementById('headDeacon').value, phone:document.getElementById('headDeaconPhone').value}, 
             headDeaconess: {name: document.getElementById('headDeaconess').value, phone:document.getElementById('headDeaconessPhone').value}, 
             treasurer: {name: document.getElementById('treasurer').value,phone:document.getElementById('treasurerPhone').value}, 
-            chruchClerk: {name: document.getElementById('chruchClerk').value, phone:document.getElementById('chruchClerkPhone').value}, 
+            churchClerk: {name: document.getElementById('churchClerk').value, phone:document.getElementById('churchClerkPhone').value}, 
             stewardship: {name: document.getElementById('stewardship').value, phone:document.getElementById('stewardshipPhone').value}, 
             communications: {name: document.getElementById('communications').value, phone:document.getElementById('communicationsPhone').value}, 
             personalMinistries: {name: document.getElementById('personalMinistries').value, phone:document.getElementById('personalMinistriesPhone').value}, 
@@ -108,9 +108,9 @@ export default function SectionDepartmentalHeads(props){
                         <FormControl defaultValue={data.treasurer.phone} required id="treasurerPhone" size="lg" type="phone" placeholder="Phone Number" />
                         <br/>
                         
-                        <Form.Label as="h6">Chruch Clerk</Form.Label>
-                        <FormControl defaultValue={data.chruchClerk.name} required id="chruchClerk" size="lg" type="name" placeholder="Chruch Clerk" />
-                        <FormControl defaultValue={data.chruchClerk.phone} required id="chruchClerkPhone" size="lg" type="phone" placeholder="Phone Number" />
+                        <Form.Label as="h6">Church Clerk</Form.Label>
+                        <FormControl defaultValue={data.churchClerk.name} required id="churchClerk" size="lg" type="name" placeholder="Church Clerk" />
+                        <FormControl defaultValue={data.churchClerk.phone} required id="churchClerkPhone" size="lg" type="phone" placeholder="Phone Number" />
                         <br/>
                         
                         <Form.Label as="h6">Stewardship</Form.Label>
