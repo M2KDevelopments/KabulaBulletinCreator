@@ -32,6 +32,7 @@ export default function SectionHome(props){
             date: document.getElementById('date').value,
             facebook: document.getElementById('facebook').value,
             website: document.getElementById('website').value,
+            tagLine: document.getElementById('tagLine').value,
             zoomLinkId: parseInt(document.getElementById('zoomLinkId').value),
             zoomPasscode: parseInt(document.getElementById('zoomPasscode').value),
             welcomeMessage: document.getElementById('welcomeMessage').value,
@@ -139,6 +140,10 @@ export default function SectionHome(props){
 
                     <Form.Label as="h6">Welcome Message</Form.Label>
                     <FormControl required id="welcomeMessage" as="textarea" style={{height:250}} size="lg" type="text" placeholder="Welcome Message" defaultValue={data.welcomeMessage}/>
+                    <br/>
+
+                    <Form.Label as="h6">Tag Line</Form.Label>
+                    <FormControl required id="tagLine" as="textarea" style={{height:250}} size="lg" type="text" placeholder="Tag Line" defaultValue={data.tagLine}/>
                     <br/>
 
                     <Button variant="dark" size="lg" type="submit">Update Front Page Details</Button>

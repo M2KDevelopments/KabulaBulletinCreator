@@ -86,7 +86,7 @@ export default function SectionZones(props){
                         <FormControl defaultValue={data.limbe} required id="limbe" size="lg" type="name" placeholder="Elder Name" />
                         <br/>
                         
-                        <Form.Label as="h6">Chilobew, Mpemba, Green Corner</Form.Label>
+                        <Form.Label as="h6">Chilobwe, Mpemba, Green Corner</Form.Label>
                         <FormControl defaultValue={data.chilobew} required id="chilobew" size="lg" type="name" placeholder="Elder Name" />
                         <br/>
                         
