@@ -5,15 +5,29 @@ import "firebase/auth";
 import "firebase/firestore";
 import { LoadingAnimation } from "./Lottie";
 import { useEffect, useState } from "react";
-import jsPDF from "jspdf";
 import html2pdf from "html2pdf.js";
 import sdaLogo from "../res/adventist-symbol--campfire.svg";
+import axios from 'axios';
 
 export default function SectionPreview(props){
 
     const [khc, setKHC] = useState(null);
+    const [sabbathSchoolLesson, setSabbathSchoolLesson] = useState(null);
     const [announcements, setAnnouncements] = useState([]);
     const FRIDAY = 5, SABBATH = 6;
+
+    useEffect(()=>{
+        async function fetchCatalogues(){
+
+            //Get Currency Rate USD to MWK - https://free.currconv.com/
+            const instance = axios.create();
+            const request = await instance.get(`https://sabbath-school-stage.adventech.io/api/v1/en/quarterlies/2016-04/lessons/01`);
+            setSabbathSchoolLesson(request);
+            console.log(request);
+            return request;
+        }
+        fetchCatalogues();
+    },[]); //if [] run the async work once
    
     useEffect(()=>{
         async function fetchData(){
@@ -95,26 +109,19 @@ export default function SectionPreview(props){
 
     
     const onDownload  = () => {
-        //parameters orientation - potrait, units - points, size A4
-        const doc = new jsPDF("l", "pt", "a4");
-        const bulletElement = document.getElementById('bulletin');
-        doc.html(bulletElement, {callback: (pdf) => pdf.save("KHC Bulletin") });
-
+       
         const element = document.getElementById('bulletin');
         const opt = {
             margin:       1,
-            filename:     'KHC Bulletin 3.pdf',
+            filename:     'KHC Bulletin.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            //jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+            html2canvas:  { scale: 1 },
+            jsPDF:        { unit: 'mm', format: 'a2', orientation: 'landscape' }
         };
         
         // New Promise-based usage:
         html2pdf().from(element).set(opt).save();
         
-        // Old monolithic-style usage:
-        //html2pdf(element, opt);
     }
 
     if(props.page){
@@ -172,330 +179,333 @@ export default function SectionPreview(props){
                     </Button>
                 </div>
 
-                <Card>
-                    <Card.Body>
-                        <Row xs={1} sm={2} md={3}>
-                            <Col>
-                                <Card>
-                                    <Card.Header style={{textAlign:"center"}}>
-                                        <h4><strong>CHURCH ACCOUNTS</strong></h4>
-                                    </Card.Header>
-                                    <Card.Body>
-                                        <h6><strong>Bank details are as follows:</strong></h6>
-                                        <ul>
-                                            <li>Bank Name: {khc.accounts.bankName}</li>
-                                            <li>Account Name: {khc.accounts.accountName}</li>
-                                            <li>Tithe and Offering Account No : {khc.accounts.titleAndOffering}</li>
-                                            <li>Church Building Account No : {khc.accounts.churchBuilding} </li>
-                                        </ul>
-                                        <hr/>
-                                        {khc.accounts.tnmTitleAndOffering.trim() === "" && khc.accounts.tnmChurchBuilding.trim() === "" ? <></>:
-                                        <>
-                                            <h6><strong>TNM Mpamba Mobile Money Accounts:</strong></h6>
-                                            <ul>
-                                                <li>Church Building Account No : {khc.accounts.tnmTitleAndOffering} </li>
-                                                <li>Church Building Merchant Code: {khc.accounts.tnmChurchBuilding} </li>
-                                            </ul>
-                                        </>
-                                        }
-                                        <br/>
-                                        {khc.accounts.airtelTitleAndOffering.trim() === "" && khc.accounts.airtelTitleAndOffering.trim() === "" ? <></>:
-                                        <>
-                                            <h6><strong>Airtel Money Accounts:</strong></h6>
-                                            <ul>
-                                                <li>Church Building Account No : {khc.accounts.airtelTitleAndOffering}</li>
-                                                <li>Church Building Merchant Code: {khc.accounts.airtelChurchBuilding}</li>
-                                            </ul>
-                                        </>
-                                        }
-                                    </Card.Body>
-                                </Card>
-                                <br/><br/>
-                               
-                                <Card>
-                                    <Card.Header>
-                                        <h4><strong>Departmental Heads</strong></h4>
-                                    </Card.Header>
-                                    <Card.Body>
-                                        <Table variant="light">
-                                            <thead></thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Church Pastor</td>
-                                                    <td>{khc.departmentalHeads.churchPastor}</td>
-                                                    <td>{khc.departmentalHeads.churchPastorPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>First Elder</td>
-                                                    <td>{khc.departmentalHeads.firstElder}</td>
-                                                    <td>{khc.departmentalHeads.firstElderPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Second Elder</td>
-                                                    <td>{khc.departmentalHeads.secondElder}</td>
-                                                    <td>{khc.departmentalHeads.secondElderPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Head Deacon</td>
-                                                    <td>{khc.departmentalHeads.headDeacon}</td>
-                                                    <td>{khc.departmentalHeads.headDeaconPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Head Deaconess</td>
-                                                    <td>{khc.departmentalHeads.headDeaconess}</td>
-                                                    <td>{khc.departmentalHeads.headDeaconessPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Treasurer</td>
-                                                    <td>{khc.departmentalHeads.treasurer}</td>
-                                                    <td>{khc.departmentalHeads.treasurerPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Church Clerk</td>
-                                                    <td>{khc.departmentalHeads.churchClerk}</td>
-                                                    <td>{khc.departmentalHeads.churchClerkPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Stewardship</td>
-                                                    <td>{khc.departmentalHeads.stewardship}</td>
-                                                    <td>{khc.departmentalHeads.stewardshipPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Communications</td>
-                                                    <td>{khc.departmentalHeads.communications}</td>
-                                                    <td>{khc.departmentalHeads.communicationsPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Personal Ministries</td>
-                                                    <td>{khc.departmentalHeads.personalMinistries}</td>
-                                                    <td>{khc.departmentalHeads.personalMinistriesPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Sabbath School</td>
-                                                    <td>{khc.departmentalHeads.sabbathSchool}</td>
-                                                    <td>{khc.departmentalHeads.sabbathSchoolPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Family Ministries</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries1}</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries1Phone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Family Ministries</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries2}</td>
-                                                    <td>{khc.departmentalHeads.familyMinistries2Phone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Projects</td>
-                                                    <td>{khc.departmentalHeads.projects}</td>
-                                                    <td>{khc.departmentalHeads.projectsPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Interest Coordinator</td>
-                                                    <td>{khc.departmentalHeads.interestCoordinator}</td>
-                                                    <td>{khc.departmentalHeads.interestCoordinatorPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Community Service</td>
-                                                    <td>{khc.departmentalHeads.communityService}</td>
-                                                    <td>{khc.departmentalHeads.communityServicePhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Children Ministries</td>
-                                                    <td>{khc.departmentalHeads.childrenMinistries}</td>
-                                                    <td>{khc.departmentalHeads.childrenMinistriesPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Adventist Youth</td>
-                                                    <td>{khc.departmentalHeads.adventistYouth}</td>
-                                                    <td>{khc.departmentalHeads.adventistYouthPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Pathfinder Director</td>
-                                                    <td>{khc.departmentalHeads.pathfinderDirector}</td>
-                                                    <td>{khc.departmentalHeads.pathfinderDirectorPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Ambassador</td>
-                                                    <td>{khc.departmentalHeads.ambassador}</td>
-                                                    <td>{khc.departmentalHeads.ambassadorPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Youth Adults</td>
-                                                    <td>{khc.departmentalHeads.youthAdults}</td>
-                                                    <td>{khc.departmentalHeads.youthAdultsPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Master Guide</td>
-                                                    <td>{khc.departmentalHeads.masterGuide}</td>
-                                                    <td>{khc.departmentalHeads.masterGuidePhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Women Ministry</td>
-                                                    <td>{khc.departmentalHeads.womenMinistry}</td>
-                                                    <td>{khc.departmentalHeads.womenMinistryPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Adventist Men</td>
-                                                    <td>{khc.departmentalHeads.adventistMen}</td>
-                                                    <td>{khc.departmentalHeads.adventistMenPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Health Ministries</td>
-                                                    <td>{khc.departmentalHeads.healthMinistries}</td>
-                                                    <td>{khc.departmentalHeads.healthMinistriesPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>PARL</td>
-                                                    <td>{khc.departmentalHeads.parl}</td>
-                                                    <td>{khc.departmentalHeads.parlPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Music</td>
-                                                    <td>{khc.departmentalHeads.music}</td>
-                                                    <td>{khc.departmentalHeads.musicPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Education</td>
-                                                    <td>{khc.departmentalHeads.education}</td>
-                                                    <td>{khc.departmentalHeads.educationPhone}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Vespers</td>
-                                                    <td>{khc.departmentalHeads.verspers}</td>
-                                                    <td>{khc.departmentalHeads.verspersPhone}</td>
-                                                </tr>
-                                                
-                                            </tbody>
-                                        </Table>
-                                        <br/>
-                                        <div className="centralise">
-                                            <h5>{`Kabula Hill SDA Church © Copyright ${year}`}</h5>
-                                        </div>
-                                    </Card.Body>
-                                </Card>
-                        
-                            </Col>
-
-
-                            <Col>
-                                
+                <div id="bulletin">     
+                    <Card>
+                        <Card.Body>
+                            <Row xs={1} sm={2} md={3}>
+                                <Col>
                                     <Card>
-                                        <Card.Header>
-                                            <strong>SABBATTH SCHOOL LESSON</strong>
+                                        <Card.Header style={{textAlign:"center"}}>
+                                            <h4><strong>CHURCH ACCOUNTS</strong></h4>
                                         </Card.Header>
                                         <Card.Body>
-
+                                            <h6><strong>Bank details are as follows:</strong></h6>
+                                            <ul>
+                                                <li>Bank Name: {khc.accounts.bankName}</li>
+                                                <li>Account Name: {khc.accounts.accountName}</li>
+                                                <li>Tithe and Offering Account No : {khc.accounts.titleAndOffering}</li>
+                                                <li>Church Building Account No : {khc.accounts.churchBuilding} </li>
+                                            </ul>
+                                            <hr/>
+                                            {khc.accounts.tnmTitleAndOffering.trim() === "" && khc.accounts.tnmChurchBuilding.trim() === "" ? <></>:
+                                            <>
+                                                <h6><strong>TNM Mpamba Mobile Money Accounts:</strong></h6>
+                                                <ul>
+                                                    <li>Church Building Account No : {khc.accounts.tnmTitleAndOffering} </li>
+                                                    <li>Church Building Merchant Code: {khc.accounts.tnmChurchBuilding} </li>
+                                                </ul>
+                                            </>
+                                            }
+                                            <br/>
+                                            {khc.accounts.airtelTitleAndOffering.trim() === "" && khc.accounts.airtelTitleAndOffering.trim() === "" ? <></>:
+                                            <>
+                                                <h6><strong>Airtel Money Accounts:</strong></h6>
+                                                <ul>
+                                                    <li>Church Building Account No : {khc.accounts.airtelTitleAndOffering}</li>
+                                                    <li>Church Building Merchant Code: {khc.accounts.airtelChurchBuilding}</li>
+                                                </ul>
+                                            </>
+                                            }
                                         </Card.Body>
                                     </Card>
-
                                     <br/>
-                                
                                     <Card>
                                         <Card.Header>
-                                            <strong>CHURCH ZONES</strong>  
+                                            <h4><strong>Departmental Heads</strong></h4>
                                         </Card.Header>
                                         <Card.Body>
                                             <Table variant="light">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ELDER</th>
-                                                        <th>ZONES</th>
-                                                    </tr>
-                                                </thead>
+                                                <thead></thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>{khc.zones.chileka}</td>
-                                                        <td>Chileka, Chatda, Ngumbe</td>
+                                                        <td>Church Pastor</td>
+                                                        <td>{khc.departmentalHeads.churchPastor}</td>
+                                                        <td>{khc.departmentalHeads.churchPastorPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.lunzu}</td>
-                                                        <td>Lunzu, Ngumbe GDC</td>
+                                                        <td>First Elder</td>
+                                                        <td>{khc.departmentalHeads.firstElder}</td>
+                                                        <td>{khc.departmentalHeads.firstElderPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.ndirande}</td>
-                                                        <td>Ndirande, Nyambadwe, Kameza</td>
+                                                        <td>Second Elder</td>
+                                                        <td>{khc.departmentalHeads.secondElder}</td>
+                                                        <td>{khc.departmentalHeads.secondElderPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.chitawira}</td>
-                                                        <td>Chitawira, Naperi, Tikumbe, Manja, Soche Hill, Njamba</td>
+                                                        <td>Head Deacon</td>
+                                                        <td>{khc.departmentalHeads.headDeacon}</td>
+                                                        <td>{khc.departmentalHeads.headDeaconPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.kabula}</td>
-                                                        <td>Kabula, Mt Pleasant, Mandala,College of Medicine</td>
+                                                        <td>Head Deaconess</td>
+                                                        <td>{khc.departmentalHeads.headDeaconess}</td>
+                                                        <td>{khc.departmentalHeads.headDeaconessPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.limbe}</td>
-                                                        <td>Limbe, Bangwe, BCA, Chigumula</td>
+                                                        <td>Treasurer</td>
+                                                        <td>{khc.departmentalHeads.treasurer}</td>
+                                                        <td>{khc.departmentalHeads.treasurerPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.chilobew}</td>
-                                                        <td>Chilobwe, Mpemba, Green Corner</td>
+                                                        <td>Church Clerk</td>
+                                                        <td>{khc.departmentalHeads.churchClerk}</td>
+                                                        <td>{khc.departmentalHeads.churchClerkPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.masalema}</td>
-                                                        <td>Masalema, Angelo, Chinyonga, Kanjedza, Chirichi</td>
+                                                        <td>Stewardship</td>
+                                                        <td>{khc.departmentalHeads.stewardship}</td>
+                                                        <td>{khc.departmentalHeads.stewardshipPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.nkolokosa}</td>
-                                                        <td>Nkolokosa, Soche E, Chimwankhunda, Zingwangwa</td>
+                                                        <td>Communications</td>
+                                                        <td>{khc.departmentalHeads.communications}</td>
+                                                        <td>{khc.departmentalHeads.communicationsPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.mbayani}</td>
-                                                        <td>Mbayani, Chemusa, Chirimba, Chapima</td>
+                                                        <td>Personal Ministries</td>
+                                                        <td>{khc.departmentalHeads.personalMinistries}</td>
+                                                        <td>{khc.departmentalHeads.personalMinistriesPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.namiwawa}</td>
-                                                        <td>Namiwawa, Chilomoni/Fargo, Sigerege, Michiru</td>
+                                                        <td>Sabbath School</td>
+                                                        <td>{khc.departmentalHeads.sabbathSchool}</td>
+                                                        <td>{khc.departmentalHeads.sabbathSchoolPhone}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>{khc.zones.sunnyside}</td>
-                                                        <td>Sunnyside, Manase, Nacholi, CI</td>
+                                                        <td>Family Ministries</td>
+                                                        <td>{khc.departmentalHeads.familyMinistries1}</td>
+                                                        <td>{khc.departmentalHeads.familyMinistries1Phone}</td>
                                                     </tr>
+                                                    <tr>
+                                                        <td>Family Ministries</td>
+                                                        <td>{khc.departmentalHeads.familyMinistries2}</td>
+                                                        <td>{khc.departmentalHeads.familyMinistries2Phone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Projects</td>
+                                                        <td>{khc.departmentalHeads.projects}</td>
+                                                        <td>{khc.departmentalHeads.projectsPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Interest Coordinator</td>
+                                                        <td>{khc.departmentalHeads.interestCoordinator}</td>
+                                                        <td>{khc.departmentalHeads.interestCoordinatorPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Community Service</td>
+                                                        <td>{khc.departmentalHeads.communityService}</td>
+                                                        <td>{khc.departmentalHeads.communityServicePhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Children Ministries</td>
+                                                        <td>{khc.departmentalHeads.childrenMinistries}</td>
+                                                        <td>{khc.departmentalHeads.childrenMinistriesPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Adventist Youth</td>
+                                                        <td>{khc.departmentalHeads.adventistYouth}</td>
+                                                        <td>{khc.departmentalHeads.adventistYouthPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Pathfinder Director</td>
+                                                        <td>{khc.departmentalHeads.pathfinderDirector}</td>
+                                                        <td>{khc.departmentalHeads.pathfinderDirectorPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ambassador</td>
+                                                        <td>{khc.departmentalHeads.ambassador}</td>
+                                                        <td>{khc.departmentalHeads.ambassadorPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Youth Adults</td>
+                                                        <td>{khc.departmentalHeads.youthAdults}</td>
+                                                        <td>{khc.departmentalHeads.youthAdultsPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Master Guide</td>
+                                                        <td>{khc.departmentalHeads.masterGuide}</td>
+                                                        <td>{khc.departmentalHeads.masterGuidePhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Women Ministry</td>
+                                                        <td>{khc.departmentalHeads.womenMinistry}</td>
+                                                        <td>{khc.departmentalHeads.womenMinistryPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Adventist Men</td>
+                                                        <td>{khc.departmentalHeads.adventistMen}</td>
+                                                        <td>{khc.departmentalHeads.adventistMenPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Health Ministries</td>
+                                                        <td>{khc.departmentalHeads.healthMinistries}</td>
+                                                        <td>{khc.departmentalHeads.healthMinistriesPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>PARL</td>
+                                                        <td>{khc.departmentalHeads.parl}</td>
+                                                        <td>{khc.departmentalHeads.parlPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Music</td>
+                                                        <td>{khc.departmentalHeads.music}</td>
+                                                        <td>{khc.departmentalHeads.musicPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Education</td>
+                                                        <td>{khc.departmentalHeads.education}</td>
+                                                        <td>{khc.departmentalHeads.educationPhone}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Vespers</td>
+                                                        <td>{khc.departmentalHeads.verspers}</td>
+                                                        <td>{khc.departmentalHeads.verspersPhone}</td>
+                                                    </tr>
+                                                    
                                                 </tbody>
-
                                             </Table>
+                                            <br/>
+                                            <div className="centralise">
+                                                <h5>{`Kabula Hill SDA Church © Copyright ${year}`}</h5>
+                                            </div>
                                         </Card.Body>
                                     </Card>
-                       
-                            </Col>
                             
-                            <Col>
-                                <div className="centralise">
-                                    <img src={sdaLogo} alt="SEVENTH DAY ADVENTIST CHURCH" width={200}/>
-                                    <h3>Off Kabula Hill Road, Box 1969, Blantyre</h3>   
-                                    <h2>{"Kabula Hill SDA Church".toUpperCase()}</h2>
-                                    <h1>{`${day} ${month} ${year}`}</h1>
-                                    <hr/>
-                                    <img src={khc.front.image} alt="Kabula Hill" className="dropShadow" width={400} />
-                                    <br/>
-                                    <h4>{khc.front.tagLine}</h4>
-                                    <br/>
-                                    <div className="banner">
-                                        <Row>
-                                            <Col><h5>Zoom Link ID: {khc.front.zoomLinkId}</h5></Col>
-                                            <Col><h5>Zoom Passcode: {khc.front.zoomPasscode}</h5></Col>
-                                        </Row>
-                                    </div>
-                                    <br/>
-                                    <h3>Welcome to Our Visitors</h3>
-                                    <hr/>
-                                    <h4>
-                                        <i style={{color:"#471F1F"}}>
-                                            {khc.front.welcomeMessage.split("\n").map(text => 
-                                                text === "" ? <br/> : <ul><li>{text}</li></ul>)}
-                                        </i>
-                                    </h4>
-                                    <div className="banner">
-                                        <h5 style={{fontFamily:"Arial"}}>Happy Sabbath to You All</h5>
-                                    </div>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Card.Body>
-                </Card>
+                                </Col>
 
-                <Card id="bulletin">
+
+                                <Col>
+                                    
+                                        <Card>
+                                            <Card.Header>
+                                                <strong>SABBATTH SCHOOL LESSON</strong>
+                                            </Card.Header>
+                                            <Card.Body>
+
+                                            </Card.Body>
+                                        </Card>
+
+                                        <br/>
+                                    
+                                        <Card>
+                                            <Card.Header>
+                                                <strong>CHURCH ZONES</strong>  
+                                            </Card.Header>
+                                            <Card.Body>
+                                                <Table variant="light">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ELDER</th>
+                                                            <th>ZONES</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>{khc.zones.chileka}</td>
+                                                            <td>Chileka, Chatda, Ngumbe</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.lunzu}</td>
+                                                            <td>Lunzu, Ngumbe GDC</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.ndirande}</td>
+                                                            <td>Ndirande, Nyambadwe, Kameza</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.chitawira}</td>
+                                                            <td>Chitawira, Naperi, Tikumbe, Manja, Soche Hill, Njamba</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.kabula}</td>
+                                                            <td>Kabula, Mt Pleasant, Mandala,College of Medicine</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.limbe}</td>
+                                                            <td>Limbe, Bangwe, BCA, Chigumula</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.chilobew}</td>
+                                                            <td>Chilobwe, Mpemba, Green Corner</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.masalema}</td>
+                                                            <td>Masalema, Angelo, Chinyonga, Kanjedza, Chirichi</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.nkolokosa}</td>
+                                                            <td>Nkolokosa, Soche E, Chimwankhunda, Zingwangwa</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.mbayani}</td>
+                                                            <td>Mbayani, Chemusa, Chirimba, Chapima</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.namiwawa}</td>
+                                                            <td>Namiwawa, Chilomoni/Fargo, Sigerege, Michiru</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>{khc.zones.sunnyside}</td>
+                                                            <td>Sunnyside, Manase, Nacholi, CI</td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                </Table>
+                                            </Card.Body>
+                                        </Card>
+                        
+                                </Col>
+                                
+                                <Col>
+                                    <div className="centralise">
+                                        <img src={sdaLogo} alt="SEVENTH DAY ADVENTIST CHURCH" width={200}/>
+                                        <h3>Off Kabula Hill Road, Box 1969, Blantyre</h3>   
+                                        <h2>{"Kabula Hill SDA Church".toUpperCase()}</h2>
+                                        <h1>{`${day} ${month} ${year}`}</h1>
+                                        <hr/>
+                                        <img src={khc.front.image} alt="Kabula Hill" className="dropShadow" width={400} />
+                                        <br/>
+                                        <h4>{khc.front.tagLine}</h4>
+                                        <br/>
+                                        <div className="banner">
+                                            <Row>
+                                                <Col><h5>Zoom Link ID: {khc.front.zoomLinkId}</h5></Col>
+                                                <Col><h5>Zoom Passcode: {khc.front.zoomPasscode}</h5></Col>
+                                            </Row>
+                                        </div>
+                                        <br/>
+                                        <h3>Welcome to Our Visitors</h3>
+                                        <hr/>
+                                        <h4>
+                                            <i style={{color:"#471F1F"}}>
+                                                {khc.front.welcomeMessage.split("\n").map(text => 
+                                                    text === "" ? <br/> : <ul><li>{text}</li></ul>)}
+                                            </i>
+                                        </h4>
+                                        <div className="banner">
+                                            <h5 style={{fontFamily:"Arial"}}>Happy Sabbath to You All</h5>
+                                        </div>
+                                    </div>
+                                </Col>
+                            </Row>
+                        </Card.Body>
+                    </Card>
+
+                    {/* HTML 2 PDF Page Break https://www.npmjs.com/package/html2pdf.js/v/0.9.0 */}
+                    <div className="html2pdf__page-break" />
+
+                    <Card >
                     <Card.Body>
                         <Row xs={1} sm={2} md={3}>
                             <Col>
@@ -757,6 +767,7 @@ export default function SectionPreview(props){
                         </Row>
                     </Card.Body>
                 </Card>
+                </div>
             </Container>
                 
         </>
