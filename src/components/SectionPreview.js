@@ -15,15 +15,21 @@ export default function SectionPreview(props){
     const [sabbathSchoolLesson, setSabbathSchoolLesson] = useState(null);
     const [announcements, setAnnouncements] = useState([]);
     const FRIDAY = 5, SABBATH = 6;
-
+ 
     useEffect(()=>{
         async function fetchCatalogues(){
 
+            const requestLessson = await firebase.firestore().collection("khc").doc("sabbathSchool").get();
+            const sabbathSchool = requestLessson.data();
+            const {lessonYear, lessonQuarter, lessonNumber} = sabbathSchool;
+
             //Get Currency Rate USD to MWK - https://free.currconv.com/
             const instance = axios.create();
-            const request = await instance.get(`https://sabbath-school-stage.adventech.io/api/v1/en/quarterlies/2016-04/lessons/01`);
-            setSabbathSchoolLesson(request);
-            console.log(request);
+            const request = await instance.get(`https://sabbathschoollesson.herokuapp.com?year=${lessonYear}&quarter=${lessonQuarter}&lesson=${lessonNumber}`).catch((error)=>console.log(error));
+    
+            //set data from api
+            setSabbathSchoolLesson(request.data);
+
             return request;
         }
         fetchCatalogues();
@@ -392,7 +398,14 @@ export default function SectionPreview(props){
                                                 <strong>SABBATTH SCHOOL LESSON</strong>
                                             </Card.Header>
                                             <Card.Body>
-
+                                                <h4><strong>Lesson {khc.sabbathSchool.lessonNumber}: {sabbathSchoolLesson.title}</strong></h4>
+                                                <h5><strong>Read for this Week's Study: </strong>{sabbathSchoolLesson.verses}</h5>
+                                                <br/>
+                                                <h5><strong>Memory Text: </strong>{sabbathSchoolLesson.memoryVerse}</h5>
+                                                <hr/>
+                                                {
+                                                    sabbathSchoolLesson.description.map(text=><><h6>{text}</h6><br/></>)
+                                                }
                                             </Card.Body>
                                         </Card>
 

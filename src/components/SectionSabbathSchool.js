@@ -46,13 +46,42 @@ export default function SectionSabbathSchool(props){
                 .then((ref) => alertify.success(msg))
                 .catch((error)=> alertify.error(error.message));
         }
-    }
+    };
+
+    const onSabbathSchoolLesson = (e) => {
+        e.preventDefault();
+
+        try{
+            const sabbathSchoolGuide = {
+                lessonYear: parseInt(document.getElementById('lessonYear').value),
+                lessonQuarter:parseInt(document.getElementById('lessonQuarter').value),
+                lessonNumber:document.getElementById('lessonNumber').value,
+            };
+
+            if(isNaN(sabbathSchoolGuide.lessonYear)||isNaN(sabbathSchoolGuide.lessonQuarter)){
+                alertify.warning('Please select a year and quarter');
+            }else{
+                
+                const msg = "Update Sabbath School Lesson Guide for the week";
+                firebase.firestore()
+                    .collection("khc")
+                    .doc("sabbathSchool")
+                    .update(sabbathSchoolGuide)
+                    .then((ref) => alertify.success(msg))
+                    .catch((error)=> alertify.error(error.message));
+            }
+        }catch(e){
+            alertify.warning('Please select a year and quarter');
+        }
+        
+    };
 
     if(data === null){
         return <LoadingAnimation width={200} title="Loading Sabbath School..."/>
     }
 
     return (
+        <>
         <Card>
             <Card.Header>
                 <Card.Title>Sabbath School</Card.Title>
@@ -68,6 +97,46 @@ export default function SectionSabbathSchool(props){
                     <Button variant="dark" size="lg" type="submit">Update Sabbath School Program</Button> 
                 </Form>
             </Card.Body>
-        </Card>            
+        </Card> 
+        <br/>
+        <Card>
+            <Card.Header>
+                <Card.Title>Sabbath School Lesson</Card.Title>
+            </Card.Header>
+            <Card.Body>
+                <Form onSubmit={onSabbathSchoolLesson}>
+                    <Form.Label as="h6">Lesson Number</Form.Label>
+                    <select defaultValue={data.lessonNumber} id="lessonNumber">
+                        <option value="01">Lesson 1</option>
+                        <option value="02">Lesson 2</option>
+                        <option value="03">Lesson 3</option>
+                        <option value="04">Lesson 4</option>
+                        <option value="05">Lesson 5</option>
+                        <option value="06">Lesson 6</option>
+                        <option value="07">Lesson 7</option>
+                        <option value="08">Lesson 8</option>
+                        <option value="09">Lesson 9</option>
+                        <option value="10">Lesson 10</option>
+                        <option value="11">Lesson 11</option>
+                        <option value="12">Lesson 12</option>
+                        <option value="13">Lesson 13</option>
+                    </select>
+                    <br/>
+                    <Form.Label as="h6">Quarter</Form.Label>
+                    <select defaultValue={data.lessonQuarter} id="lessonQuarter">
+                        <option value={1}>Quarter 1 - Jan, Feb, Mar</option>
+                        <option value={2}>Quarter 2 - Apr, May, Jun</option>
+                        <option value={3}>Quarter 3 - Jul, Aug, Sep</option>
+                        <option value={4}>Quarter 4 - Oct, Nov, Dec</option>
+                    </select>
+                    <br/>
+                    <Form.Label as="h6">Lesson Number</Form.Label>
+                    <FormControl min={2000} max={2100} defaultValue={data.lessonYear} required id="lessonYear" size="lg" type="number" placeholder="Start Time" />
+                    <br/>
+                    <Button variant="dark" size="lg" type="submit">Update Sabbath School Lesson</Button> 
+                </Form>
+            </Card.Body>
+        </Card> 
+        </>           
     );
 }
