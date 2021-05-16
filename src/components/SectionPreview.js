@@ -23,7 +23,6 @@ export default function SectionPreview(props){
             const sabbathSchool = requestLessson.data();
             const {lessonYear, lessonQuarter, lessonNumber} = sabbathSchool;
 
-            //Get Currency Rate USD to MWK - https://free.currconv.com/
             const instance = axios.create();
             const request = await instance.get(`https://sabbathschoollesson.herokuapp.com?year=${lessonYear}&quarter=${lessonQuarter}&lesson=${lessonNumber}`).catch((error)=>console.log(error));
     
