@@ -156,20 +156,26 @@ export default function SectionSabbathSchool(props){
         <br/><br/>
 
         {
-            sabbathSchoolLesson === null || sabbathSchoolLesson.title === undefined ? <LoadingAnimation title="Loading Sabbath School" />: 
-            <div className="centralise">
-                <h2>Preview</h2>
-                <hr/>
-                <br/>
-                <h4><strong>Lesson {data.lessonNumber}: {sabbathSchoolLesson.title}</strong></h4>
-                <h5><strong>Read for this Week's Study: </strong>{sabbathSchoolLesson.verses}</h5>
-                <br/>
-                <h5><strong>Memory Text: </strong>{sabbathSchoolLesson.memoryVerse}</h5>
-                <hr/>
-                {
-                    sabbathSchoolLesson.description.map((text, index)=><h6 key={"ssd"+index}>{text}<br/></h6>)
-                }
-            </div>
+            sabbathSchoolLesson === null ? <LoadingAnimation title="Loading Sabbath School" />:  
+            <>
+            {
+                sabbathSchoolLesson.title === undefined ? <h1>{sabbathSchoolLesson}</h1> :
+
+                <div className="centralise">
+                    <h2>Preview</h2>
+                    <hr/>
+                    <br/>
+                    <h4><strong>Lesson {data.lessonNumber}: {sabbathSchoolLesson.title}</strong></h4>
+                    <h5><strong>Read for this Week's Study: </strong>{sabbathSchoolLesson.verses}</h5>
+                    <br/>
+                    <h5><strong>Memory Text: </strong>{sabbathSchoolLesson.memoryVerse}</h5>
+                    <hr/>
+                    {
+                        sabbathSchoolLesson.description.map((text, index)=><h6 key={"ssd"+index}>{text}<br/></h6>)
+                    }
+                </div>
+            }
+            </>
         }
         
         </>           
