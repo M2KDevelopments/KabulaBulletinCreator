@@ -15,7 +15,8 @@ export default function SectionPreview(props){
     const [sabbathSchoolLesson, setSabbathSchoolLesson] = useState(null);
     const [announcements, setAnnouncements] = useState([]);
     const FRIDAY = 5, SABBATH = 6;
- 
+    
+    
     useEffect(()=>{
         async function fetchCatalogues(){
 
@@ -121,6 +122,7 @@ export default function SectionPreview(props){
             filename:     'KHC Bulletin.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 1 },
+            useCORS: true,
             jsPDF:        { unit: 'mm', format: 'a2', orientation: 'landscape' }
         };
         
@@ -524,7 +526,7 @@ export default function SectionPreview(props){
                                 <div className="banner title">
                                     <h5>SABBATH PROGRAM</h5>
                                 </div>
-                                <div className="banner">
+                                <div className="banner" style={{height:1400}}>
                                     <Row xs={2}>
                                         <Col><h5><strong>First Service: </strong></h5></Col><Col><h5><strong>{khc.firstService.startTime} - {khc.firstService.endTime}</strong></h5></Col>
                                         <Col><h6><strong>Elder On Duty: </strong></h6></Col><Col><h6>{khc.firstService.elderOnDuty}</h6></Col>
@@ -568,10 +570,10 @@ export default function SectionPreview(props){
                             </Col>
                             
                             <Col>
-                                <div className="banner title">
+                                <div className="banner title" >
                                     <h5>ANNOUNCEMENT - Page 1</h5>
                                 </div>
-                                <div className="banner">
+                                <div className="banner"  style={{height:1400}}>
                                     <h5><strong>Welcome Remarks</strong></h5>
                                     <h6>{khc.announcements.welcomeRemarks.split("\n").map(remark => <>{remark}<br/></>)}</h6>
                                     <br/><br/>
