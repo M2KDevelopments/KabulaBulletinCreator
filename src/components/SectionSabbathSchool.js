@@ -156,7 +156,7 @@ export default function SectionSabbathSchool(props){
         <br/><br/>
 
         {
-            sabbathSchoolLesson === null ? <LoadingAnimation title="Loading Sabbath School" />: 
+            sabbathSchoolLesson === null || sabbathSchoolLesson.title === undefined ? <LoadingAnimation title="Loading Sabbath School" />: 
             <div className="centralise">
                 <h2>Preview</h2>
                 <hr/>

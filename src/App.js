@@ -24,12 +24,12 @@ export default function App() {
         <ScrollToTop />
         <Navigation/>
         <Switch>
-            <Route exact path="/" component={() => <SectionPreview page={true}/>} />
-            <Route exact path="/bulletin" component={() => <PageBulletin />} />
-            <Route exact path="/privacyPolicy" component={() => <PagePrivacyPolicy />} />
-            <Route exact path="/terms" component={() => <PageTerms />} />
-            <Route exact path="/404" component={() => <Page404 />} />
-            <Redirect to="/404"/>
+          <Route exact path="/" component={() => <SectionPreview page={true}/>} />
+          <Route exact path="/bulletin" component={() => <PageBulletin />} />
+          <Route exact path="/privacyPolicy" component={() => <PagePrivacyPolicy />} />
+          <Route exact path="/terms" component={() => <PageTerms />} />
+          <Route exact path="/404" component={() => <Page404 />} />
+          <Redirect to="/404"/>
         </Switch>
       <Footer />
     </Router>
