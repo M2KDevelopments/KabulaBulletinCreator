@@ -38,10 +38,6 @@ export default function PageBulletin(){
         }
     });
 
-    const onReset = () => {
-
-    }
-
     const showSection = () => {
         switch(section){
             case SECTION.HOME:
@@ -78,8 +74,6 @@ export default function PageBulletin(){
                 <div className="centralise">
                     <h1>Kabula Hill SDA <strong>Bulletin Tool</strong></h1>
                     <hr/>
-                    <Button size="lg" variant="info" onClick={onReset}>Reset Bulletin</Button>
-                    <br/>
                 </div>
             </Container>
             <Container>

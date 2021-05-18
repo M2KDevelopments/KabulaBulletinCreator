@@ -6,7 +6,8 @@ import "firebase/firestore";
 import { LoadingAnimation } from "./Lottie";
 import { useEffect, useState } from "react";
 import html2pdf from "html2pdf.js";
-import sdaLogo from "../res/adventist-symbol--campfire.svg";
+import imageSDALogo from "../res/image.png";
+import imageKabula from "../res/kabula.jpeg";
 import axios from 'axios';
 
 export default function SectionPreview(props){
@@ -134,7 +135,7 @@ export default function SectionPreview(props){
     if(props.page){
         if((new Date().getDay() !==  FRIDAY || new Date().getDay() !== SABBATH)){
                 return <Container style={{paddingTop:100, paddingBottom:40}}>
-                            <LoadingAnimation width={200} title="Bulletin Is still in progress Friday or Saturday"/>
+                            <LoadingAnimation width={200} title="Bulletin Is still in progress. Visit on Friday or Saturday"/>
                             <br/>
                             <div className="centralise">
                                 <Button variant="primary" size="lg" href="http://kabulahillsdachurch.com">
@@ -483,12 +484,12 @@ export default function SectionPreview(props){
                                 
                                 <Col>
                                     <div className="centralise">
-                                        <img src={sdaLogo} alt="SEVENTH DAY ADVENTIST CHURCH" width={200}/>
+                                        <img src={imageSDALogo} alt="SEVENTH DAY ADVENTIST CHURCH" width={500} style={{marginTop:30}}/>
                                         <h3>Off Kabula Hill Road, Box 1969, Blantyre</h3>   
                                         <h2>{"Kabula Hill SDA Church".toUpperCase()}</h2>
                                         <h1>{`${day} ${month} ${year}`}</h1>
                                         <hr/>
-                                        <img src={khc.front.image} alt="Kabula Hill" className="dropShadow" width={400} />
+                                        <img src={imageKabula} alt="Kabula Hill" className="dropShadow" width={400} />
                                         <br/>
                                         <h4>{khc.front.tagLine}</h4>
                                         <br/>
