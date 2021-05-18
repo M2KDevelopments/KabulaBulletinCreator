@@ -144,7 +144,7 @@ export default function SectionPreview(props){
     }
     
 
-    if(khc === null){
+    if(khc === null || sabbathSchoolLesson === null){
         return <Container style={{paddingTop:100, paddingBottom:40}}>
                 <LoadingAnimation width={200} title="Loading Bulletin..."/>
             </Container>
